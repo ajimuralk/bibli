@@ -4,14 +4,13 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const bookSearch = require('./bookSearch');
 const PORT = process.env.PORT || 8082;
-const googleBooksAPI = 'AIzaSyD4JhOYBIM94J6R6C-5IiC06XvBza-dDSM';
+// const googleBooksAPI = 'AIzaSyD4JhOYBIM94J6R6C-5IiC06XvBza-dDSM';
 
 app.use(bodyParser.json());
 
 app.get('/books', (req, res) => {
-  const type = req.query.type,
-    input = req.query.input;
-  axios.get(bookSearch(type, input)).then(response => {
+  const input = req.query.input;
+  axios.get(bookSearch(input)).then(response => {
     const data = response.data.items.map(book => {
       let {
         title,
@@ -43,7 +42,7 @@ app.get('/books', (req, res) => {
         },
         image: imageLinks.thumbnail
       };
-    })
+    });
     res.json(data);
   });
 });
