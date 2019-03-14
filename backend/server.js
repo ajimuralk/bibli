@@ -9,18 +9,25 @@ const googleBooksAPI = 'AIzaSyD4JhOYBIM94J6R6C-5IiC06XvBza-dDSM';
 app.use(bodyParser.json());
 
 app.get('/books', (req, res) => {
-  const input = req.query.input,
-    type = req.query.type;
-  axios.get(bookSearch(input, type)).then(response => {
+  const type = req.query.type,
+    input = req.query.input;
+  axios.get(bookSearch(type, input)).then(response => {
     const data = response.data.items.map(book => {
-      const {
+      let {
         title,
         authors,
         publisher,
         publishedDate,
         description,
-        imageLinks
+        imageLinks,
+        categories,
+        averageRating,
+        ratingsCount
       } = book.volumeInfo;
+
+      if (!imageLinks) {
+        imageLinks = '';
+      }
 
       return {
         id: book.id,
@@ -30,11 +37,13 @@ app.get('/books', (req, res) => {
           publisher,
           publishedDate,
           description,
+          categories,
+          averageRating,
+          ratingsCount
         },
-        image: imageLinks.thumbnail 
+        image: imageLinks.thumbnail
       };
-    });
-
+    })
     res.json(data);
   });
 });

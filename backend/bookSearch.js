@@ -1,4 +1,4 @@
-module.exports = bookSearch = (input, type) => {
+module.exports = bookSearch = (type, input) => {
   const searchInput = input.split(' ').join('+');
   let searchType = '';
   switch (type) {
@@ -11,5 +11,5 @@ module.exports = bookSearch = (input, type) => {
     default:
       searchType = 'intitle';
   }
-  return `https://www.googleapis.com/books/v1/volumes?q=${searchType}=${searchInput}`;
+  return `https://www.googleapis.com/books/v1/volumes?q=${searchType}=${searchInput}&maxResults=40&orderBy=relevance`;
 };
