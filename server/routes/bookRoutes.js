@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
+const bookSearch = require('../bookSearch');
 
 router
   .route('/')
@@ -7,9 +9,9 @@ router
     const input = req.query.input;
     axios.get(bookSearch(input)).then(response => {
       const data = response.data.items.map(book => {
-        const {
+        let {
           title,
-          authors,
+          author,
           publisher,
           publishedDate,
           description,
@@ -22,12 +24,12 @@ router
         if (!imageLinks) {
           imageLinks = '';
         }
-        
+
         return {
           id: book.id,
           volumeInfo: {
             title,
-            authors,
+            author,
             publisher,
             publishedDate,
             description,
