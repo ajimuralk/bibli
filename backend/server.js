@@ -12,7 +12,7 @@ app.get('/books', (req, res) => {
   const input = req.query.input;
   axios.get(bookSearch(input)).then(response => {
     const data = response.data.items.map(book => {
-      let {
+      const {
         title,
         authors,
         publisher,
