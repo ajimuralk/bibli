@@ -21,7 +21,8 @@ router.route('/').post((req, res) => {
             password: hash
           }).then(response => {
             res.json({
-              success: true
+              success: true,
+              err: null
             });
           });
         }
