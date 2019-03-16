@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const isLoggedIn = require('../middleware/isLoggedIn');
 const bookSearch = require('../bookSearch');
 
 router
@@ -11,7 +12,7 @@ router
       const data = response.data.items.map(book => {
         let {
           title,
-          author,
+          authors,
           publisher,
           publishedDate,
           description,
@@ -29,7 +30,7 @@ router
           id: book.id,
           volumeInfo: {
             title,
-            author,
+            author: authors,
             publisher,
             publishedDate,
             description,
@@ -43,10 +44,12 @@ router
       res.json(data);
     });
   })
-  .post((req, res) => {
+  .post(isLoggedIn, (req, res) => {
+    console.log(req.body)
     //find user
     //validate user
-    //add book to db 
-  })
+    //add book to db
+    res.send('hit');
+  });
 
 module.exports = router;

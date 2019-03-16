@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const isLoggedIn = require('../middleware/isLoggedIn');
 const { User } = require('../models');
+const errMsg =
+  "The email or password you entered couldn't be verified. Please try again.";
 
 router.route('/').post((req, res) => {
   const { email, password } = req.body;
@@ -11,22 +15,31 @@ router.route('/').post((req, res) => {
     if (!user) {
       res.json({
         success: false,
-        err:
-          "The email or password you entered couldn't be verified. Please try again."
+        err: errMsg
       });
     } else {
       bcrypt.compare(password, user.password, (err, result) => {
         if (err) {
           res.json({
             success: false,
-            err:
-              "The email or password you entered couldn't be verified. Please try again."
+            err: errMsg
           });
-        } else
-          res.json({
-            success: true,
-            err: null
-          });
+        }
+        let token = jwt.sign(
+          {
+            email: user.email,
+            iss: `localhost:${process.env.PORT}`,
+            exp: Math.floor(Date.now() / 1000) + 60 * 60,
+            role: 'user'
+          },
+          process.env.jwtSecret
+        );
+        console.log(token)
+        res.json({
+          success: true,
+          token,
+          err: null
+        });
       });
     }
   });
