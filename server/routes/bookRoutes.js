@@ -42,6 +42,11 @@ router
       });
       res.json(data);
     });
-  });
+  })
+  .post((req, res) => {
+    //find user
+    //validate user
+    //add book to db 
+  })
 
 module.exports = router;
