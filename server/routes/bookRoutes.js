@@ -47,9 +47,9 @@ router
   .post(isLoggedIn, (req, res) => {
     console.log(req.body)
     //find user
-    //validate user
+    //perform validation--or does isLoggedIn do this?
     //add book to db
-    res.send('hit');
+    res.send('Saved');
   });
 
 module.exports = router;
