@@ -38,7 +38,11 @@ router.route('/').post((req, res) => {
         res.json({
           success: true,
           token,
-          err: null
+          err: null,
+          user: {
+            firstName: user.firstName,
+            lastName: user.lastName
+          }
         });
       });
     }

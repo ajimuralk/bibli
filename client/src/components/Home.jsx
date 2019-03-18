@@ -7,10 +7,11 @@ import BookList from './BookList.jsx';
 
 class Home extends Component {
   render() {
+    const firstName = this.props.firstName
     return (
       <div className="App">
         <h1>Home</h1>
-        <h3>Welcome</h3>
+        <h3>Welcome {firstName} </h3>
         <SearchForm findBooks={this.props.findBooks} />
         <BookList books={this.props.books} />
       </div>

@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Home from './components/Home';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 const loginUrl = `http://localhost:8082/login`;
 const signUpUrl = `http://localhost:8082/signup`;
+let storageToken = localStorage.getItem('token');
+// let storageUserFirstName = localStorage.getItem('userFirstName');
 const booksUrl = input => `http://localhost:8082/books?input=${input}`;
 
 class App extends Component {
   state = {
-    loggedInToken: null,
+    loggedInToken: '' || storageToken,
+    errMsg: '',
     user: [],
     books: [],
     events: []
   };
+
+  componentDidMount() {
+    if (this.state.loggedInToken) {
+      return <Home />;
+    }
+  }
 
   findBooks = input => {
     axios
@@ -28,6 +38,9 @@ class App extends Component {
   t;
 
   login = (email, password) => {
+    if (!email ||! password) {
+      return alert('Must fill out all fields')
+    }
     axios
       .post(loginUrl, {
         email,
@@ -36,9 +49,12 @@ class App extends Component {
       .then(({ data }) => {
         console.log(data);
         this.setState({
-          loggedInToken: data.token
+          loggedInToken: data.token,
+          user: data.user,
+          errMsg: data.err
         });
         localStorage.setItem('token', this.state.loggedInToken);
+        // localStorage.setItem('userFirstName', this.state.user);
       });
   };
 
@@ -59,16 +75,19 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          {this.state.loggedInToken && (
+          {!this.state.loggedInToken && (
             <Route
               path="/"
-              exact
-              render={() => (
-                <Home findBooks={this.findBooks} books={this.state.books} />
-              )}
+              render={() => <Login login={this.login} signUp={this.signUp} />}
             />
           )}
-          <Route path="/" exact render={() => <Login login={this.login} />} />
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <Home findBooks={this.findBooks} books={this.state.books}  />
+            )}
+          />
         </Switch>
       </div>
     );
