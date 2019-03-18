@@ -10,6 +10,7 @@ class Home extends Component {
     return (
       <div className="App">
         <h1>Home</h1>
+        <h3>Welcome</h3>
         <SearchForm findBooks={this.props.findBooks} />
         <BookList books={this.props.books} />
       </div>

@@ -7,7 +7,7 @@ class SearchForm extends Component {
         <form>
           <input
             type="text"
-            placeholder="Search by author, title, or subject"
+            placeholder="Search by author or title"
             ref={self => (this.searchField = self)}
             onChange={() => this.props.findBooks(this.searchField.value)}
           />

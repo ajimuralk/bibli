@@ -4,12 +4,18 @@ import axios from 'axios';
 import Home from './components/Home';
 const booksUrl = input => `http://localhost:8082/books?input=${input}`;
 
+
 class App extends Component {
   state = {
     user: [],
     books: [],
     events: []
   };
+
+  // componentDidMount() {
+  //   axios.get()
+  // }
+
 
   findBooks = input => {
     axios

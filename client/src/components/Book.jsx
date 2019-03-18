@@ -8,6 +8,7 @@ class Book extends Component {
         <h3>{book.title}</h3>
         <h4>{book.author}</h4>
         <img src={book.image} alt="cover-art" />
+        {/* add button w/func to post book to user's acct */}
       </div>
     );
   }
