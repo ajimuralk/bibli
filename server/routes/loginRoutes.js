@@ -34,7 +34,7 @@ router.route('/').post((req, res) => {
           },
           process.env.jwtSecret
         );
-        console.log(token)
+        console.log(token);
         res.json({
           success: true,
           token,
