@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Book from './'
+import Book from './Book.jsx';
 
 class BookList extends Component {
   render() {
-    const books = this.props.books.map(book => {
-      return <Book {...book} />;
+    const books = this.props.books.map((book, i) => {
+      return <Book {...book} key={i} />;
     });
-    return <div />;
+    return <div>{books}</div>;
   }
 }
 

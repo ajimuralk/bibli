@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import SearchForm from './SearchForm;'
-import BookList from './BookList';
+import SearchForm from './SearchForm.jsx';
+import BookList from './BookList.jsx';
 
 //1) Header, 2) Seach bar, 3) News Feed, 4) Footer
 

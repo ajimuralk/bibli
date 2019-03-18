@@ -28,16 +28,14 @@ router
 
         return {
           id: book.id,
-          volumeInfo: {
-            title,
-            author: authors,
-            publisher,
-            publishedDate,
-            description,
-            categories,
-            averageRating,
-            ratingsCount
-          },
+          title,
+          author: authors,
+          publisher,
+          publishedDate,
+          description,
+          categories,
+          averageRating,
+          ratingsCount,
           image: imageLinks.thumbnail
         };
       });
@@ -45,7 +43,7 @@ router
     });
   })
   .post(isLoggedIn, (req, res) => {
-    console.log(req.body)
+    console.log(req.body);
     //find user
     //perform validation--or does isLoggedIn do this?
     //add book to db

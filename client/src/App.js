@@ -25,6 +25,7 @@ class App extends Component {
   cancelBtn = () => {};
 
   render() {
+    console.log(this.state.books)
     return (
       <div className="App">
         <Switch>
