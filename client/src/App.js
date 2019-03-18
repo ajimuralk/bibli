@@ -14,15 +14,15 @@ class App extends Component {
   findBooks = input => {
     axios
       .get(booksUrl(input))
-      .then(res => {
-        console.log(res.data);
+      .then(({ data }) => {
+        this.setState({
+          books: data
+        });
       })
       .catch(err => console.log(err));
   };
 
-  cancelBtn = () => {
-    
-  }
+  cancelBtn = () => {};
 
   render() {
     return (
@@ -31,7 +31,9 @@ class App extends Component {
           <Route
             path="/"
             exact
-            render={() => <Home findBooks={this.findBooks} />}
+            render={() => (
+              <Home findBooks={this.findBooks} books={this.state.books} />
+            )}
           />
         </Switch>
       </div>
