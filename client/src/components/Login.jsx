@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form'
 // import { Route, Link } from 'react-router-dom';
 // import SignUp from './SignUp';
 
@@ -9,29 +11,35 @@ class Login extends Component {
       <div>
         <h2>Log In</h2>
         <form>
-          <input
+          <Form.Group>
+          <Form.Control
             type="text"
             placeholder="email"
-            
+            size="sm"
             ref={self => {
               this.emailInput = self;
             }}
           />
-          <input
+          <Form.Control
             type="password"
+            size="sm"
             placeholder="password"
             ref={self => {
               this.passwordInput = self;
             }}
           />
-          <button
+          <Button
             type="button"
+            variant="outline-primary"
+            size="sm"
+            block
             onClick={() => {
               this.props.login(this.emailInput.value, this.passwordInput.value);
             }}
           >
             Log In
-          </button>
+          </Button>
+          </Form.Group>
         </form>
         {/* <Link to='/signup'> Sign Up </Link>
         <Route
