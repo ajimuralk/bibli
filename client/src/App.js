@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import Home from './components/Home';
 import Login from './components/Login';
+// import SignUp from './components/SignUp';
+import './global-styles/global.css';
 const loginUrl = `http://localhost:8082/login`;
 const signUpUrl = `http://localhost:8082/signup`;
 const userUrl = `http://localhost:8082/user`;
@@ -17,7 +19,8 @@ class App extends Component {
     errMsg: '',
     user: {},
     books: [],
-    events: []
+    events: [],
+    signUpClicked: false
   };
 
   componentDidMount() {
@@ -29,13 +32,15 @@ class App extends Component {
 
   //Populate with user content after creating join tables
   getUserData() {
-    axios.post(userUrl, {
-      id: storageId
-    }).then(({data}) => {
-      this.setState({
-        user: data
+    axios
+      .post(userUrl, {
+        id: storageId
       })
-    })
+      .then(({ data }) => {
+        this.setState({
+          user: data
+        });
+      });
   }
 
   findBooks = input => {
@@ -61,8 +66,8 @@ class App extends Component {
       })
       .then(({ data }) => {
         if (data.success === false) {
-          alert('Username/Password mismatch')
-          return
+          alert('Username/Password mismatch');
+          return;
         }
         console.log(data);
         this.setState({
@@ -74,6 +79,12 @@ class App extends Component {
         localStorage.setItem('token', this.state.loggedInToken);
         localStorage.setItem('userId', this.state.user.id);
       });
+  };
+
+  toggleSignUp = () => {
+    this.setState({
+      signUpClicked: !this.state.signUpClicked
+    });
   };
 
   signUp = (firstName, lastname, email, password) => {
@@ -90,21 +101,32 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.user)
+    console.log(this.state.user);
     return (
       <div className="App">
         <Switch>
           {!this.state.loggedInToken && (
             <Route
               path="/"
-              render={() => <Login login={this.login} signUp={this.signUp} />}
+              render={() => (
+                <Login
+                  login={this.login}
+                  signUp={this.signUp}
+                  toggleSignUp={this.toggleSignUp}
+                  signUpClicked={this.state.signUpClicked}
+                />
+              )}
             />
           )}
           <Route
             path="/"
             exact
             render={() => (
-              <Home findBooks={this.findBooks} books={this.state.books} user={this.state.user} />
+              <Home
+                findBooks={this.findBooks}
+                books={this.state.books}
+                user={this.state.user}
+              />
             )}
           />
         </Switch>

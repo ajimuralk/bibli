@@ -3,37 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import logo from '../assets/bibli-logo-b-darkgray-01.png';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import SignUp from './SignUp';
-import LoginForm from './LoginForm';
 
-class Login extends Component {
+class LoginForm extends Component {
   render() {
     return (
-      <div className="login-container">
-        <Image className="login__logo" src={logo} />
-
-        {/* {this.props.signUpClicked && (
-          <Route
-            path="/login/new"
-            render={() => <SignUp signUp={this.props.signUp} />}
-          />
-        )}
-
-        <Switch>
-        <Route
-            path="/login"
-            render={() => <LoginForm login={this.props.login} toggleSignUp={this.props.toggleSignUp} />}
-          />
-        </Switch> */}
-{/* 
-          <Route
-            path="/login"
-            render={() => <LoginForm login={this.props.login} toggleSignUp={this.props.toggleSignUp} />}
-          /> */}
-        
-
-        {/* <Form.Group className="login__form">
+        <Form.Group className="login__form">
           <Form.Control
             type="text"
             size="sm"
@@ -64,13 +40,15 @@ class Login extends Component {
           >
             Submit
           </Button>
-        </Form.Group>
+
         <Link to="/login/new" onClick={this.props.toggleSignUp}>
           Sign Up
-        </Link> */}
-      </div>
+        </Link>
+        </Form.Group>
     );
   }
 }
 
-export default Login;
+export default LoginForm;
+
+

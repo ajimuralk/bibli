@@ -1,40 +1,43 @@
 import React, { Component } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 class SignUp extends Component {
   render() {
     return (
       <div>
-        <h2>Sign Up</h2>
-        <form>
-          <input
+
+          <Form.Group>
+          <Form.Control
             type="text"
             placeholder="first name"
             ref={self => {
               this.firstNameInput = self;
             }}
           />
-          <input
+          <Form.Control
             type="text"
             placeholder="last name"
             ref={self => {
               this.lastNameInput = self;
             }}
           />
-          <input
+          <Form.Control
             type="text"
             placeholder="email"
             ref={self => {
               this.emailInput = self;
             }}
           />
-          <input
+          <Form.Control
             type="password"
             placeholder="password"
             ref={self => {
               this.passwordInput = self;
             }}
           />
-          <button
+          <Button
             type="button"
             onClick={() => {
               this.props.signUp(
@@ -46,8 +49,8 @@ class SignUp extends Component {
             }}
           >
             Submit
-          </button>
-        </form>
+          </Button>
+          </Form.Group>
       </div>
     );
   }

@@ -1,0 +1,35 @@
+//MIXINS
+@mixin form-input {
+  margin: 15% 0;
+  width: 75vw;
+  border: none;
+  border-bottom: 1px solid gray;
+  border-radius: 0;
+}
+
+//VARIABLES
+
+.login-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .login__logo {
+    margin: 15% 0 8% 0;
+    width: 50%;
+  }
+}
+
+.login__form {
+  .login__form-input {
+    @include form-input();
+  }
+  .login__button {
+    margin-top: 20%;
+    color: white;
+    font-weight: bold;
+    background: slategray;
+    border-color: gray;
+  }
+}
