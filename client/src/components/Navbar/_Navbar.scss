@@ -1,0 +1,18 @@
+.Navbar {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 8vh;
+  border-top: 1px solid gray;
+  background: rgba($color: #e8eff3, $alpha: .95);
+  .nav-item {
+    img {
+      width: 2rem;
+
+    }
+  }
+}

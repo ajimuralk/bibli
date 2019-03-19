@@ -1,5 +1,5 @@
 body {
-  background: #f7f7f7;
+  background: #F7F7F7;
 }
 
 .login-container {
@@ -26,6 +26,7 @@ body {
 .login-container .login__h1 {
   font-size: 3rem;
   margin-top: 0;
+  color: #252728;
 }
 
 .login__form .login__form-input {
@@ -34,8 +35,8 @@ body {
   border: none;
   border-bottom: 1px solid gray;
   border-radius: 0;
-  background: #f7f7f7;
-  font-size: 18px;
+  background: #F7F7F7;
+  font-size: 1.3rem;
 }
 
 .login__form .login__button {
@@ -58,8 +59,8 @@ body {
   border: none;
   border-bottom: 1px solid gray;
   border-radius: 0;
-  background: #f7f7f7;
-  font-size: 18px;
+  background: #F7F7F7;
+  font-size: 1.3rem;
 }
 
 .signup__form .button__signup {
@@ -80,5 +81,72 @@ body {
   border-color: gray;
   margin-top: 10%;
   width: 75vw;
+}
+
+.search-container {
+  margin: 5% 0 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.search-container .search {
+  margin: 8% 0;
+  width: 75vw;
+  border: none;
+  border-bottom: 1px solid gray;
+  border-radius: 0;
+  background: #F7F7F7;
+  font-size: 1.3rem;
+  width: 70vw;
+}
+
+.search-container .cancel {
+  margin-left: 0%;
+}
+
+.Navbar {
+  position: fixed;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+  height: 8vh;
+  border-top: 1px solid gray;
+  background: rgba(232, 239, 243, 0.95);
+}
+
+.Navbar .nav-item img {
+  width: 2rem;
+}
+
+.card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  margin: 4% 4%;
+  -webkit-box-shadow: 0px 1px 10px 1px #FFFFFF;
+          box-shadow: 0px 1px 10px 1px #FFFFFF;
+}
+
+.card img {
+  width: 40vw;
 }
 /*# sourceMappingURL=global.css.map */

@@ -12,13 +12,18 @@
   border-bottom: 1px solid gray;
   border-radius: 0;
   background: $background-gray-lighter;
-  font-size: 18px;
+  font-size: 1.3rem;
 }
 
 //VARIABLES
-$background-gray-lighter: rgb(247, 247, 247);
+$background-gray-lighter: #F7F7F7;
+$text-black: #252728;
 
 //PARTIALS
 @import '../components/LoginContainer/LoginContainer';
 @import '../components/LoginForm/LoginForm';
 @import '../components/SignUpForm/SignUpForm';
+@import '../components/SearchForm/SearchForm';
+@import '../components/Navbar/Navbar';
+@import '../components/Home/Home';
+@import '../components/Book/Book';

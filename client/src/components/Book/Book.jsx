@@ -13,7 +13,7 @@ class Book extends Component {
             <Card.Text>{book.author}</Card.Text>
           </Card.Body>
 
-          {/* add button w/func to post book to user's acct */}
+          {/* add button that triggers dropdown w/func to post book to user's acct */}
         </Card>
       </div>
     );
