@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import logo from '../assets/bibli-logo-b-darkgray-01.png';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import SignUp from './SignUp';
 import LoginForm from './LoginForm';
 
@@ -18,20 +18,12 @@ class Login extends Component {
             path="/login/new"
             render={() => <SignUp signUp={this.props.signUp} />}
           />
-        )}
+        )} */}
 
-        <Switch>
-        <Route
-            path="/login"
-            render={() => <LoginForm login={this.props.login} toggleSignUp={this.props.toggleSignUp} />}
-          />
-        </Switch> */}
-{/* 
-          <Route
-            path="/login"
-            render={() => <LoginForm login={this.props.login} toggleSignUp={this.props.toggleSignUp} />}
-          /> */}
-        
+        <LoginForm
+          login={this.props.login}
+          signUpClicked={this.props.signUpClicked}
+        />
 
         {/* <Form.Group className="login__form">
           <Form.Control
