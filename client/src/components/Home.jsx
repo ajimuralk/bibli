@@ -7,7 +7,7 @@ import BookList from './BookList.jsx';
 
 class Home extends Component {
   render() {
-    const firstName = this.props.firstName
+    const { firstName } = this.props.user;
     return (
       <div className="App">
         <h1>Home</h1>

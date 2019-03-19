@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
-import SignUp from './SignUp';
+// import { Route, Link } from 'react-router-dom';
+// import SignUp from './SignUp';
 
 
 class Login extends Component {
@@ -20,7 +20,6 @@ class Login extends Component {
           <input
             type="password"
             placeholder="password"
-            
             ref={self => {
               this.passwordInput = self;
             }}

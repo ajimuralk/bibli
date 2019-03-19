@@ -41,7 +41,8 @@ router.route('/').post((req, res) => {
           err: null,
           user: {
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            id: user.id
           }
         });
       });
