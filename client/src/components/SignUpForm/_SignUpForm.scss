@@ -1,0 +1,24 @@
+.signup__form {
+  .signup-input {
+    @include form-input();
+  }
+
+  .button__signup {
+    display: block;
+    margin-top: 20%;
+    color: white;
+    font-weight: bold;
+    background: slategray;
+    border-color: gray;
+    width: 75vw;
+  }
+  .button__cancel {
+    display: block;
+    color: white;
+    font-weight: bold;
+    background: rgb(63, 69, 77);
+    border-color: gray;
+    margin-top: 10%;
+    width: 75vw;
+  }
+}

@@ -1,0 +1,17 @@
+body {
+  background: $background-gray-lighter;
+}
+
+.login-container {
+  @include form-container;
+
+  .login__logo {
+    margin: 15% 0 0 0;
+    width: 50%;
+  }
+  .login__h1 {
+    font-size: 3rem;
+    margin-top: 0;
+  }
+
+}

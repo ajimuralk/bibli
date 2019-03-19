@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import Home from './components/Home';
-import Login from './components/Login';
-// import SignUp from './components/SignUp';
+import Home from './components/Home/Home';
+import LoginContainer from './components/LoginContainer/LoginContainer';
 import './global-styles/global.css';
-const loginUrl = `http://localhost:8082/login`;
-const signUpUrl = `http://localhost:8082/signup`;
-const userUrl = `http://localhost:8082/user`;
+const loginUrl = `http://localhost:8080/login`;
+const signUpUrl = `http://localhost:8080/signup`;
+const userUrl = `http://localhost:8080/user`;
+
 let storageToken = localStorage.getItem('token');
 let storageId = localStorage.getItem('userId');
-const booksUrl = input => `http://localhost:8082/books?input=${input}`;
+
+const booksUrl = input => `http://localhost:8080/books?input=${input}`;
+
+
 
 class App extends Component {
   state = {
@@ -29,7 +32,6 @@ class App extends Component {
       return <Home />;
     }
   }
-
   //Populate with user content after creating join tables
   getUserData() {
     axios
@@ -87,11 +89,11 @@ class App extends Component {
     });
   };
 
-  signUp = (firstName, lastname, email, password) => {
+  signUp = (firstName, lastName, email, password) => {
     axios
       .post(signUpUrl, {
         firstName,
-        lastname,
+        lastName,
         email,
         password
       })
@@ -101,7 +103,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.user);
     return (
       <div className="App">
         <Switch>
@@ -109,7 +110,7 @@ class App extends Component {
             <Route
               path="/"
               render={() => (
-                <Login
+                <LoginContainer
                   login={this.login}
                   signUp={this.signUp}
                   toggleSignUp={this.toggleSignUp}

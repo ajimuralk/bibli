@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from 'react-bootstrap/Modal';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -7,10 +7,10 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-
-          <Form.Group>
+        <Form.Group className="signup__form">
           <Form.Control
             type="text"
+            className="signup-input"
             placeholder="first name"
             ref={self => {
               this.firstNameInput = self;
@@ -18,6 +18,7 @@ class SignUp extends Component {
           />
           <Form.Control
             type="text"
+            className="signup-input"
             placeholder="last name"
             ref={self => {
               this.lastNameInput = self;
@@ -25,6 +26,7 @@ class SignUp extends Component {
           />
           <Form.Control
             type="text"
+            className="signup-input"
             placeholder="email"
             ref={self => {
               this.emailInput = self;
@@ -32,6 +34,7 @@ class SignUp extends Component {
           />
           <Form.Control
             type="password"
+            className="signup-input"
             placeholder="password"
             ref={self => {
               this.passwordInput = self;
@@ -39,6 +42,7 @@ class SignUp extends Component {
           />
           <Button
             type="button"
+            className="button__signup"
             onClick={() => {
               this.props.signUp(
                 this.firstNameInput.value,
@@ -48,9 +52,12 @@ class SignUp extends Component {
               );
             }}
           >
-            Submit
+            SIGN UP
           </Button>
-          </Form.Group>
+          <Link to="/login">
+            <Button type="button" className="button__cancel">CANCEL</Button>
+          </Link>
+        </Form.Group>
       </div>
     );
   }

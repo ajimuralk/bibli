@@ -1,3 +1,7 @@
+body {
+  background: #f7f7f7;
+}
+
 .login-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -15,16 +19,23 @@
 }
 
 .login-container .login__logo {
-  margin: 15% 0 8% 0;
+  margin: 15% 0 0 0;
   width: 50%;
 }
 
+.login-container .login__h1 {
+  font-size: 3rem;
+  margin-top: 0;
+}
+
 .login__form .login__form-input {
-  margin: 15% 0;
+  margin: 8% 0;
   width: 75vw;
   border: none;
   border-bottom: 1px solid gray;
   border-radius: 0;
+  background: #f7f7f7;
+  font-size: 18px;
 }
 
 .login__form .login__button {
@@ -33,5 +44,41 @@
   font-weight: bold;
   background: slategray;
   border-color: gray;
+}
+
+.login-link,
+.signup-link {
+  display: block;
+  text-decoration: none;
+}
+
+.signup__form .signup-input {
+  margin: 8% 0;
+  width: 75vw;
+  border: none;
+  border-bottom: 1px solid gray;
+  border-radius: 0;
+  background: #f7f7f7;
+  font-size: 18px;
+}
+
+.signup__form .button__signup {
+  display: block;
+  margin-top: 20%;
+  color: white;
+  font-weight: bold;
+  background: slategray;
+  border-color: gray;
+  width: 75vw;
+}
+
+.signup__form .button__cancel {
+  display: block;
+  color: white;
+  font-weight: bold;
+  background: #3f454d;
+  border-color: gray;
+  margin-top: 10%;
+  width: 75vw;
 }
 /*# sourceMappingURL=global.css.map */

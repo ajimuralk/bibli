@@ -1,0 +1,20 @@
+
+
+.login__form {
+  .login__form-input {
+    @include form-input();
+  }
+  .login__button {
+    margin-top: 20%;
+    color: white;
+    font-weight: bold;
+    background: slategray;
+    border-color: gray;
+  }
+}
+
+.login-link,
+.signup-link {
+  display: block;
+  text-decoration: none;
+}

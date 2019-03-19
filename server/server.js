@@ -6,12 +6,12 @@ const bookRoutes = require('./routes/bookRoutes');
 const signupRoutes = require('./routes/signupRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 const userRoutes = require('./routes/userRoutes');
-const PORT = process.env.PORT || 8082;
 require('dotenv').config();
+const PORT = process.env.PORT || 8082;
+
 
 app.use(cors());
 app.use(bodyParser.json());
-
 app.use('/books', bookRoutes);
 app.use('/signup', signupRoutes);
 app.use('/login', loginRoutes);
