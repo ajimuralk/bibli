@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import Home from './components/Home/Home';
 import LoginContainer from './components/LoginContainer/LoginContainer';
+import Nearby from './components/Nearby/Nearby';
 import './global-styles/global.css';
 const loginUrl = `http://localhost:8080/login`;
 const signUpUrl = `http://localhost:8080/signup`;
@@ -18,7 +19,6 @@ const success = pos => {
   crd = {latitude, longitude}
   console.log(crd);
   return crd
-
 };
 
 const error = err => {
@@ -143,6 +143,12 @@ class App extends Component {
                 books={this.state.books}
                 user={this.state.user}
               />
+            )}
+          />
+          <Route 
+            path='/map'
+            render={() => (
+              <Nearby />
             )}
           />
         </Switch>

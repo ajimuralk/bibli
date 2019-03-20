@@ -108,6 +108,11 @@ body {
   margin-left: 0%;
 }
 
+#Map {
+  height: 92vh;
+  width: 100vw;
+}
+
 .Navbar {
   position: fixed;
   bottom: 0;

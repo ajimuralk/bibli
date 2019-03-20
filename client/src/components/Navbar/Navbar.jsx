@@ -16,7 +16,7 @@ class Navbar extends Component {
             <img src={homeIcon} alt="home" />
           </Nav.Item>
         </Link>
-        <Link to="/">
+        <Link to="/map">
           <Nav.Item>
             <img src={map} alt="nearby" />
           </Nav.Item>
