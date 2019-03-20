@@ -13,7 +13,17 @@ let storageId = localStorage.getItem('userId');
 
 const booksUrl = input => `http://localhost:8080/books?input=${input}`;
 
+const success = pos => {
+  let { latitude, longitude } = pos.coords,
+  crd = {latitude, longitude}
+  console.log(crd);
+  return crd
 
+};
+
+const error = err => {
+  return `Error: ${err}`;
+};
 
 class App extends Component {
   state = {
@@ -29,9 +39,14 @@ class App extends Component {
   componentDidMount() {
     if (this.state.loggedInToken) {
       this.getUserData();
+      this.getUserLocation();
       return <Home />;
     }
   }
+  getUserLocation = () => {
+    return navigator.geolocation.getCurrentPosition(success, error);
+  };
+
   //Populate with user content after creating join tables
   getUserData() {
     axios

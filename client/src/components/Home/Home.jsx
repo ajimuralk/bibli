@@ -8,7 +8,7 @@ import Navbar from '../Navbar/Navbar';
 
 class Home extends Component {
   render() {
-    const { firstName } = this.props.user;
+    // const { firstName } = this.props.user;
     return (
       <div className="App">
         {/* <h3>Welcome {firstName} </h3> */}
