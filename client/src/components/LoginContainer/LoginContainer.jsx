@@ -15,7 +15,7 @@ class Login extends Component {
         <Switch>
           <Route
             path="/login/new"
-            render={() => <SignUpForm signUp={this.props.signUp} />}
+            render={() => <SignUpForm signUp={this.props.signUp} toggleSignUp={this.props.toggleSignUp} />}
           />
           <LoginForm login={this.props.login} />
         </Switch>

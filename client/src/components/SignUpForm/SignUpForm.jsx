@@ -54,8 +54,10 @@ class SignUp extends Component {
           >
             SIGN UP
           </Button>
-          <Link to="/login">
-            <Button type="button" className="button__cancel">CANCEL</Button>
+          <Link to="/">
+            <Button type="button" className="button__cancel"
+            onClick={()=> this.props.toggleSignUp()}
+            >CANCEL</Button>
           </Link>
         </Form.Group>
       </div>
