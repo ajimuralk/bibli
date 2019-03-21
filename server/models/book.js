@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     ratingsCount: DataTypes.INTEGER
   }, {});
   Book.associate = function(models) {
-    Book.belongsToMany(models.User, {through: 'UserBooks'})
+    Book.belongsToMany(models.User, {through: 'UserBook'})
   };
   return Book;
 };

@@ -144,6 +144,12 @@ body {
   width: 2rem;
 }
 
+.Home .bookSvg {
+  margin: 50% 0 0 15%;
+  width: 75%;
+  z-index: 0;
+}
+
 .card {
   display: -webkit-box;
   display: -ms-flexbox;

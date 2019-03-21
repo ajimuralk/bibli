@@ -5,6 +5,8 @@ import Home from './components/Home/Home';
 import LoginContainer from './components/LoginContainer/LoginContainer';
 import Nearby from './components/Nearby/Nearby';
 import './global-styles/global.css';
+// import openSocket from 'socket.io-client';
+// const socket = openSocket('http://localhost:8080');
 const loginUrl = `http://localhost:8080/login`;
 const signUpUrl = `http://localhost:8080/signup`;
 const userUrl = `http://localhost:8080/user`;

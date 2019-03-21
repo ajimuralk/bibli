@@ -45,7 +45,6 @@ router
   })
   .post(isLoggedIn, (req, res) => {
     const {id, BookId} = req.body
-
     User.findOne({
       where: { id }
     })
