@@ -113,6 +113,12 @@ body {
   width: 100vw;
 }
 
+.leaflet-touch .leaflet-bar {
+  position: fixed;
+  right: 32px;
+  bottom: 130px;
+}
+
 .Navbar {
   position: fixed;
   bottom: 0;

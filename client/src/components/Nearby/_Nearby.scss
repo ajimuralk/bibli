@@ -2,3 +2,9 @@
   height: 92vh;
   width: 100vw;
 }
+
+.leaflet-touch .leaflet-bar {
+  position: fixed;
+  right: 32px;
+  bottom: 130px;
+}

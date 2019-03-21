@@ -14,12 +14,6 @@ let storageId = localStorage.getItem('userId');
 
 const booksUrl = input => `http://localhost:8080/books?input=${input}`;
 
-const success = pos => {
-  let { latitude, longitude } = pos.coords,
-  crd = {latitude, longitude}
-  console.log(crd);
-  return crd
-};
 
 const error = err => {
   return `Error: ${err}`;
@@ -30,6 +24,8 @@ class App extends Component {
     loggedInToken: '' || storageToken,
     userId: '' || storageId,
     errMsg: '',
+    userLatLng: [],
+    locationTimestamp: '',
     user: {},
     books: [],
     events: [],
@@ -43,8 +39,16 @@ class App extends Component {
       return <Home />;
     }
   }
+
   getUserLocation = () => {
-    return navigator.geolocation.getCurrentPosition(success, error);
+    navigator.geolocation.getCurrentPosition(success => {
+      let { latitude, longitude } = success.coords,
+        timestamp = success.timestamp;
+      this.setState({
+        userLatLng: [latitude, longitude],
+        locationTimestamp: timestamp
+      });
+    }, error);
   };
 
   //Populate with user content after creating join tables
@@ -145,11 +149,9 @@ class App extends Component {
               />
             )}
           />
-          <Route 
-            path='/map'
-            render={() => (
-              <Nearby />
-            )}
+          <Route
+            path="/map"
+            render={() => <Nearby userLatLng={this.state.userLatLng} />}
           />
         </Switch>
       </div>
