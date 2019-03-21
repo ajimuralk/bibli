@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../Navbar/Navbar';
 import {
-  Map as NearbyMap,
+  Map,
   Marker,
   Popup,
   TileLayer,
@@ -18,9 +18,9 @@ class Nearby extends Component {
   render() {
     return (
       <div>
-        <NearbyMap center={this.props.userLatLng} zoom="18" id="Map">
+        <Map center={this.props.userLatLng} zoom="18" id="Map">
           <TileLayer url={lightMap} attribution={mapTile} />
-        </NearbyMap>
+        </Map>
         <Navbar />
       </div>
     );

@@ -11,6 +11,7 @@ const userUrl = `http://localhost:8080/user`;
 
 let storageToken = localStorage.getItem('token');
 let storageId = localStorage.getItem('userId');
+let lastLatLng = localStorage.getItem('userLatLng');
 
 const booksUrl = input => `http://localhost:8080/books?input=${input}`;
 
@@ -24,7 +25,7 @@ class App extends Component {
     loggedInToken: '' || storageToken,
     userId: '' || storageId,
     errMsg: '',
-    userLatLng: '',
+    userLatLng: '' || lastLatLng,
     locationTimestamp: '',
     user: {},
     books: [],
@@ -35,7 +36,6 @@ class App extends Component {
   componentDidMount() {
     if (this.state.loggedInToken) {
       this.getUserData();
-      this.getUserLocation();
       return <Home />;
     }
   }
@@ -48,6 +48,7 @@ class App extends Component {
         userLatLng: [latitude, longitude],
         locationTimestamp: timestamp
       });
+      localStorage.setItem('userLatLng', this.state.userLatLng)
     }, error);
   };
 
@@ -90,7 +91,7 @@ class App extends Component {
           alert('Username/Password mismatch');
           return;
         }
-        console.log(data);
+        this.getUserLocation();
         this.setState({
           loggedInToken: data.token,
           userId: data.user.id,
