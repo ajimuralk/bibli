@@ -119,6 +119,11 @@ body {
   bottom: 130px;
 }
 
+.mapSvg {
+  margin: 75% 0 0 8%;
+  width: 80%;
+}
+
 .Navbar {
   position: fixed;
   bottom: 0;
@@ -147,7 +152,6 @@ body {
 .Home .bookSvg {
   margin: 50% 0 0 15%;
   width: 75%;
-  z-index: 0;
 }
 
 .card {

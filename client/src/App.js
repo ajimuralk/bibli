@@ -5,8 +5,10 @@ import Home from './components/Home/Home';
 import LoginContainer from './components/LoginContainer/LoginContainer';
 import Nearby from './components/Nearby/Nearby';
 import './global-styles/global.css';
+
 // import openSocket from 'socket.io-client';
 // const socket = openSocket('http://localhost:8080');
+
 const loginUrl = `http://localhost:8080/login`;
 const signUpUrl = `http://localhost:8080/signup`;
 const userUrl = `http://localhost:8080/user`;
@@ -16,6 +18,7 @@ let lastLatLng = localStorage.getItem('userLatLng');
 
 const booksUrl = input => `http://localhost:8080/books?input=${input}`;
 
+let default_viewport = [36.2048, 138.2019];
 
 const error = err => {
   return `Error: ${err}`;
@@ -26,7 +29,7 @@ class App extends Component {
     loggedInToken: '' || storageToken,
     userId: '' || storageId,
     errMsg: '',
-    userLatLng: '' || lastLatLng,
+    userLatLng: default_viewport || lastLatLng,
     locationTimestamp: '',
     user: {},
     books: [],
@@ -41,6 +44,14 @@ class App extends Component {
     }
   }
 
+  componentDidUpdate(prevProvs, prevState) {
+    if (prevState.userLatLng !== this.getUserLocation()) {
+      this.setState({
+        userLatLng: this.getUserLocation()
+      })
+    } 
+  }
+
   getUserLocation = () => {
     navigator.geolocation.getCurrentPosition(success => {
       let { latitude, longitude } = success.coords,
@@ -48,8 +59,9 @@ class App extends Component {
       this.setState({
         userLatLng: [latitude, longitude],
         locationTimestamp: timestamp
+      }, () => {
+        localStorage.setItem('userLatLng', this.state.userLatLng)
       });
-      localStorage.setItem('userLatLng', this.state.userLatLng)
     }, error);
   };
 
