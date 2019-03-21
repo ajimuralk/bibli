@@ -24,7 +24,7 @@ class App extends Component {
     loggedInToken: '' || storageToken,
     userId: '' || storageId,
     errMsg: '',
-    userLatLng: [],
+    userLatLng: '',
     locationTimestamp: '',
     user: {},
     books: [],
