@@ -8,7 +8,6 @@ import './global-styles/global.css';
 const loginUrl = `http://localhost:8080/login`;
 const signUpUrl = `http://localhost:8080/signup`;
 const userUrl = `http://localhost:8080/user`;
-
 let storageToken = localStorage.getItem('token');
 let storageId = localStorage.getItem('userId');
 let lastLatLng = localStorage.getItem('userLatLng');
@@ -91,7 +90,7 @@ class App extends Component {
           alert('Username/Password mismatch');
           return;
         }
-        this.getUserLocation();
+      this.getUserLocation();
         this.setState({
           loggedInToken: data.token,
           userId: data.user.id,
