@@ -56,15 +56,15 @@ router
         averageRating,
         ratingsCount
       } = book);
-      //Takes first author in array
-      newBook.author = book.author[0];
+    //Takes first author in array
+    newBook.author = book.author[0];
 
     User.findOne({
       where: { id }
     }).then(user => {
       //Create both new book and UserBook instance?
       //Or is issue in the findAll?
-     console.log(user)
+      console.log(user);
       // Book.create({
       //   newBook
       // });

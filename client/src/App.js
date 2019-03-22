@@ -4,22 +4,23 @@ import axios from 'axios';
 import Home from './components/Home/Home';
 import LoginContainer from './components/LoginContainer/LoginContainer';
 import Nearby from './components/Nearby/Nearby';
+import Hello from './components/Hello/Hello';
 import './global-styles/global.css';
+import Events from './components/Events/Events';
 
 // import openSocket from 'socket.io-client';
 // const socket = openSocket('http://localhost:8080');
 
 const loginUrl = `http://localhost:8080/login`;
 const signUpUrl = `http://localhost:8080/signup`;
+const booksPostUrl = `http://localhost:8080/books`;
 const userUrl = `http://localhost:8080/user`;
 let storageToken = localStorage.getItem('token');
 let storageId = localStorage.getItem('userId');
 let lastLatLng = localStorage.getItem('userLatLng');
+let default_viewport = [36.2048, 138.2019];
 
 const booksUrl = input => `http://localhost:8080/books?input=${input}`;
-const booksPostUrl = `http://localhost:8080/books`;
-
-let default_viewport = [36.2048, 138.2019];
 
 class App extends Component {
   state = {
@@ -40,20 +41,12 @@ class App extends Component {
       return <Home />;
     }
   }
-  
+
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.userLatLng !== this.getUserLocation()) {
-      return true
+      return true;
     }
   }
-
-  // componentDidUpdate(prevProvs, prevState) {
-  //   if (prevState.userLatLng !== this.getUserLocation()) {
-  //     this.setState({
-  //       userLatLng: this.getUserLocation()
-  //     });
-  //   }
-  // }
 
   getUserLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -83,7 +76,7 @@ class App extends Component {
         id: storageId
       })
       .then(({ data }) => {
-        console.log(data)
+        console.log(data);
         this.setState({
           user: data
         });
@@ -99,6 +92,13 @@ class App extends Component {
         });
       })
       .catch(err => console.log(err));
+  };
+
+  cancelSearch = ref => {
+    ref.value = '';
+    this.setState({
+      books: []
+    });
   };
 
   login = (email, password) => {
@@ -189,6 +189,7 @@ class App extends Component {
                 bookModalClicked={this.state.bookModalClicked}
                 postBook={this.postBook}
                 findBooks={this.findBooks}
+                cancelSearch={this.cancelSearch}
                 books={this.state.books}
                 user={this.state.user}
               />
@@ -198,6 +199,8 @@ class App extends Component {
             path="/map"
             render={() => <Nearby userLatLng={this.state.userLatLng} />}
           />
+          <Route path="/hello" render={() => <Hello />} />
+          <Route path="/events" render={() => <Events />} />
         </Switch>
       </div>
     );

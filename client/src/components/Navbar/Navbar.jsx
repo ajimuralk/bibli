@@ -21,12 +21,12 @@ class Navbar extends Component {
             <img src={map} alt="nearby" />
           </Nav.Item>
         </Link>
-        <Link to="/">
+        <Link to="/hello">
           <Nav.Item>
             <img src={messageSquare} alt="messages" />
           </Nav.Item>
         </Link>
-        <Link to="/">
+        <Link to="/events">
           <Nav.Item>
             <img src={coffee} alt="events" />
           </Nav.Item>

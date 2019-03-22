@@ -9,6 +9,9 @@
   }
   .cancel {
     margin-left: 0%;
+    &:active {
+      width: 1.6rem;
+    }
   }
 }
 

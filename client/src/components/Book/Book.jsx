@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
-import Collapse from 'react-bootstrap/Collapse';
 import add from '../../assets/icons/plus-circle.svg';
 
 class Book extends Component {
