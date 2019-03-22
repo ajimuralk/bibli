@@ -115,13 +115,13 @@ class App extends Component {
           alert('Username/Password mismatch');
           return;
         }
-        this.getUserLocation();
         this.setState({
           loggedInToken: data.token,
           userId: data.user.id,
           user: data.user,
           errMsg: data.err
         });
+        this.getUserLocation()
         localStorage.setItem('token', this.state.loggedInToken);
         localStorage.setItem('userId', this.state.user.id);
       });
