@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
   jwt.verify(token, process.env.jwtSecret, (err, decoded) => {
     if (err) {
       console.log(err);
-      res.send('Unable to access private data');
+      res.status(400).send('Unable to access private data');
     } else next();
   });
 };

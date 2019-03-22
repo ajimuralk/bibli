@@ -167,7 +167,18 @@ body {
           box-shadow: 0px 1px 10px 1px #FFFFFF;
 }
 
-.card img {
-  width: 40vw;
+.card .img {
+  width: 128px;
+  height: 189px;
+}
+
+.card .addBtn {
+  max-width: 50px;
+  padding-right: 5%;
+  padding-top: 35%;
+}
+
+.card .collapse {
+  height: 80vh;
 }
 /*# sourceMappingURL=global.css.map */

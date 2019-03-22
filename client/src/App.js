@@ -17,24 +17,21 @@ let storageId = localStorage.getItem('userId');
 let lastLatLng = localStorage.getItem('userLatLng');
 
 const booksUrl = input => `http://localhost:8080/books?input=${input}`;
+const booksPostUrl = `http://localhost:8080/books`;
 
 let default_viewport = [36.2048, 138.2019];
 
-const error = err => {
-  return `Error: ${err}`;
-};
-
 class App extends Component {
   state = {
+    userLatLng: default_viewport || lastLatLng,
     loggedInToken: '' || storageToken,
     userId: '' || storageId,
     errMsg: '',
-    userLatLng: default_viewport || lastLatLng,
     locationTimestamp: '',
     user: {},
     books: [],
-    events: [],
-    signUpClicked: false
+    signUpClicked: false,
+    bookModalClicked: false
   };
 
   componentDidMount() {
@@ -43,26 +40,40 @@ class App extends Component {
       return <Home />;
     }
   }
-
-  componentDidUpdate(prevProvs, prevState) {
-    if (prevState.userLatLng !== this.getUserLocation()) {
-      this.setState({
-        userLatLng: this.getUserLocation()
-      })
-    } 
+  
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.userLatLng !== this.getUserLocation()) {
+      return true
+    }
   }
 
+  // componentDidUpdate(prevProvs, prevState) {
+  //   if (prevState.userLatLng !== this.getUserLocation()) {
+  //     this.setState({
+  //       userLatLng: this.getUserLocation()
+  //     });
+  //   }
+  // }
+
   getUserLocation = () => {
-    navigator.geolocation.getCurrentPosition(success => {
-      let { latitude, longitude } = success.coords,
-        timestamp = success.timestamp;
-      this.setState({
-        userLatLng: [latitude, longitude],
-        locationTimestamp: timestamp
-      }, () => {
-        localStorage.setItem('userLatLng', this.state.userLatLng)
-      });
-    }, error);
+    navigator.geolocation.getCurrentPosition(
+      success => {
+        let { latitude, longitude } = success.coords,
+          timestamp = success.timestamp;
+        this.setState(
+          {
+            userLatLng: [latitude, longitude],
+            locationTimestamp: timestamp
+          },
+          () => {
+            localStorage.setItem('userLatLng', this.state.userLatLng);
+          }
+        );
+      },
+      error => {
+        console.log(error);
+      }
+    );
   };
 
   //Populate with user content after creating join tables
@@ -72,6 +83,7 @@ class App extends Component {
         id: storageId
       })
       .then(({ data }) => {
+        console.log(data)
         this.setState({
           user: data
         });
@@ -88,7 +100,6 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   };
-  t;
 
   login = (email, password) => {
     if (!email || !password) {
@@ -104,7 +115,7 @@ class App extends Component {
           alert('Username/Password mismatch');
           return;
         }
-      this.getUserLocation();
+        this.getUserLocation();
         this.setState({
           loggedInToken: data.token,
           userId: data.user.id,
@@ -119,6 +130,23 @@ class App extends Component {
   toggleSignUp = () => {
     this.setState({
       signUpClicked: !this.state.signUpClicked
+    });
+  };
+
+  postBook = book => {
+    axios
+      .post(booksPostUrl, {
+        id: this.state.userId,
+        book
+      })
+      .then(res => {
+        console.log(res.data);
+      });
+  };
+
+  toggleBookModal = () => {
+    this.setState({
+      bookModalClicked: !this.state.bookModalClicked
     });
   };
 
@@ -157,6 +185,9 @@ class App extends Component {
             exact
             render={() => (
               <Home
+                toggleBookModal={this.toggleBookModal}
+                bookModalClicked={this.state.bookModalClicked}
+                postBook={this.postBook}
                 findBooks={this.findBooks}
                 books={this.state.books}
                 user={this.state.user}

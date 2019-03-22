@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { User, UserBook } = require('../models');
+const { User, UserBook, Book } = require('../models');
 const isLoggedIn = require('../middleware/isLoggedIn');
 const bookSearch = require('../bookSearch');
 
@@ -43,19 +43,41 @@ router
       res.json(data);
     });
   })
-  .post(isLoggedIn, (req, res) => {
-    const {id, BookId} = req.body
+  .post((req, res) => {
+    //First id below is UserId, not BookID
+    let { id, book } = req.body,
+      newBook = ({
+        id,
+        title,
+        publisher,
+        publishedDate,
+        description,
+        categories,
+        averageRating,
+        ratingsCount
+      } = book);
+      //Takes first author in array
+      newBook.author = book.author[0];
+
     User.findOne({
       where: { id }
-    })
-    .then(user => {
-      UserBook.create({
-        UserId: id,
-        BookId
-      })
-      console.log(user)
+    }).then(user => {
+      //Create both new book and UserBook instance?
+      //Or is issue in the findAll?
+     console.log(user)
+      // Book.create({
+      //   newBook
+      // });
+
+      // .then(user => {
+      //   UserBook.create({
+      //     BookId,
+      //     id
+      //   });
+      // });
+      console.log(user);
       res.send('Saved');
-    })
+    });
   });
 
 module.exports = router;

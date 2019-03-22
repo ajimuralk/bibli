@@ -3,7 +3,16 @@
   flex-flow: row nowrap;
   margin: 4% 4%;
   box-shadow: 0px 1px 10px 1px #FFFFFF;
-  img {
-    width: 40vw;
+  .img {
+    width: 128px;
+    height: 189px;
   }
-}
+  .addBtn {
+    max-width: 50px;
+    padding-right: 5%;
+    padding-top: 35%;
+  }
+  .collapse {
+    height: 80vh;
+  }
+} 

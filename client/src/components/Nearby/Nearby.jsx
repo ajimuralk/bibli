@@ -11,21 +11,32 @@ const mapTile =
 
 class Nearby extends Component {
   render() {
- 
-  
-    // if (this.props.userLatLng === '' || null) 
-    // return <h4>Loading...</h4>
+    const { userLatLng } = this.props;
+    // if (userLatLng === '' || undefined) return <h4>Loading...</h4>;
 
     return (
       <div>
-        {(this.props.userLatLng === null || '') && (
+        {!userLatLng ? (
+          <>
           <Image className="mapSvg" src={mapSvg} />
+          <Navbar />
+          </>
+        ) : (
+          <>
+            <Map
+              center={this.props.userLatLng}
+              zoom="18"
+              id="Map"
+              animate="true"
+            >
+              <TileLayer url={lightMap} attribution={mapTile} />
+              <Marker position={userLatLng}>
+                <Popup> You are here </Popup>
+              </Marker>
+            </Map>
+            <Navbar />
+          </>
         )}
-
-        <Map center={this.props.userLatLng} zoom="18" id="Map">
-          <TileLayer url={lightMap} attribution={mapTile} />
-        </Map>
-        <Navbar />
       </div>
     );
   }
