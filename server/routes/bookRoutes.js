@@ -44,38 +44,32 @@ router
     });
   })
   .post((req, res) => {
-    //First id below is UserId, not BookID
-    let { id, book } = req.body,
-      newBook = ({
-        id,
+    let {
         title,
         publisher,
         publishedDate,
-        description,
-        categories,
         averageRating,
         ratingsCount
-      } = book);
-    //Takes first author in array
-    newBook.author = book.author[0];
+      } = req.body.book,
+      BookId = req.body.book.id,
+      author = req.body.book.author[0],
+      id = req.body.UserId;
 
     User.findOne({
       where: { id }
     }).then(user => {
-      //Create both new book and UserBook instance?
-      //Or is issue in the findAll?
-      console.log(user);
-      // Book.create({
-      //   newBook
-      // });
 
-      // .then(user => {
-      //   UserBook.create({
-      //     BookId,
-      //     id
-      //   });
-      // });
-      console.log(user);
+      Book.create({
+        BookId: BookId,
+        title,
+        author,
+        publisher,
+        publishedDate,
+        averageRating,
+        ratingsCount
+      })
+        .then(book => UserBook.create({ UserId: user.id, BookId: BookId }))
+        .catch(err => console.log(err));
       res.send('Saved');
     });
   });

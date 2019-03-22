@@ -5,30 +5,22 @@ const errMsg =
   "The email or password you entered couldn't be verified. Please try again.";
 
 router.route('/').post((req, res) => {
-  const { id } = req.body;
-  User.findAll({
-    where: {
-      id
-    },
-    include: [{
-      model: Book,
-      through: {
-        attributes: ['UserId']
-      }
-    }]
+  const { id } = req.body; 
+  User.findOne({
+    where: { id }
   }).then(user => {
-    console.log(user);
     if (!user) {
       res.json({
         success: false,
         err: errMsg
       });
     } else {
-      res.json({
-        user
-        // firstName: user.firstName,
-        // lastName: user.lastName
-      });
+      let userId = user.id
+      UserBook.findAll({
+        where: {userId}
+      }).then(books=> {
+        res.json({user, books})
+      })
     }
   });
 });

@@ -154,7 +154,7 @@ body {
 }
 
 .Navbar .nav-item img:active {
-  width: 2.2rem;
+  margin-bottom: 10px;
 }
 
 .hello__h1 {
@@ -202,6 +202,10 @@ body {
   max-width: 50px;
   padding-right: 5%;
   padding-top: 35%;
+}
+
+.card .addBtn:active {
+  width: 4.2rem;
 }
 
 .card .collapse {

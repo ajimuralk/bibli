@@ -11,6 +11,9 @@
     max-width: 50px;
     padding-right: 5%;
     padding-top: 35%;
+    &:active {
+      width: 4.2rem;
+    }
   }
   .collapse {
     height: 80vh;
