@@ -4,9 +4,8 @@ const { Location } = require('../models');
 
 router.route('/').post((req, res) => {
   const { latitude, longitude, UserId } = req.body;
-  Location.findOrCreate({ where: { id: UserId } }).spread((result, bool) => {
-    //bool === created instance
-    if (bool) {
+  Location.findOrCreate({ where: { id: UserId } }).spread((result, newInstanceCreated) => {
+    if (newInstanceCreated) {
       Location.create({
         latitude,
         longitude,
@@ -14,9 +13,13 @@ router.route('/').post((req, res) => {
       });
       res.json(result);
     } else {
-      Location.update({ latitude, longitude }, { where: { UserId } }).catch(
-        err => console.log(err)
-      );
+      Location.update({ latitude, longitude }, { where: { UserId } })
+        .then(locationResult => {
+          res.json({
+            update: `true`
+          });
+        })
+        .catch(err => console.log(err));
     }
   });
 });

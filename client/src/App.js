@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import LoginContainer from './components/LoginContainer/LoginContainer';
 import Nearby from './components/Nearby/Nearby';
 import Hello from './components/Hello/Hello';
+import Profile from './components/Profile/Profile';
 import './global-styles/global.css';
 import Events from './components/Events/Events';
 
@@ -29,7 +30,6 @@ class App extends Component {
     loggedInToken: '' || storageToken,
     userId: '' || storageId,
     errMsg: '',
-    locationTimestamp: '',
     user: {},
     books: [],
     signUpClicked: false,
@@ -52,12 +52,10 @@ class App extends Component {
   getUserLocation = () => {
     navigator.geolocation.getCurrentPosition(
       success => {
-        let { latitude, longitude } = success.coords,
-          timestamp = success.timestamp;
+        let { latitude, longitude } = success.coords
         this.setState(
           {
-            userLatLng: [latitude, longitude],
-            locationTimestamp: timestamp
+            userLatLng: [latitude, longitude]
           },
           () => {
             localStorage.setItem('userLatLng', this.state.userLatLng);
@@ -79,7 +77,6 @@ class App extends Component {
     );
   };
 
-  //Populate with user content after creating join tables
   getUserData() {
     axios
       .post(userUrl, {
@@ -210,6 +207,9 @@ class App extends Component {
             path="/map"
             render={() => <Nearby userLatLng={this.state.userLatLng} />}
           />
+          <Route path="/profile" render={() => <Profile 
+             user={this.state.user}
+            />} />
           <Route path="/hello" render={() => <Hello />} />
           <Route path="/events" render={() => <Events />} />
         </Switch>

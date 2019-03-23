@@ -5,7 +5,8 @@ import homeIcon from '../../assets/icons/home.svg';
 import coffee from '../../assets/icons/coffee.svg';
 import messageSquare from '../../assets/icons/message-square.svg';
 import map from '../../assets/icons/map-pin.svg';
-// import { Link } from 'react-router-dom';
+import user from '../../assets/icons/user.svg';
+
 
 class Navbar extends Component {
   render() {
@@ -21,6 +22,11 @@ class Navbar extends Component {
             <img src={map} alt="nearby" />
           </Nav.Item>
         </Link>
+        <Link to="/profile">
+          <Nav.Item>
+            <img src={user} alt="events" />
+          </Nav.Item>
+        </Link>
         <Link to="/hello">
           <Nav.Item>
             <img src={messageSquare} alt="messages" />
@@ -31,6 +37,7 @@ class Navbar extends Component {
             <img src={coffee} alt="events" />
           </Nav.Item>
         </Link>
+    
       </Nav>
     );
   }
