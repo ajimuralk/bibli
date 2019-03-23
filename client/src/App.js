@@ -14,6 +14,7 @@ import Events from './components/Events/Events';
 const loginUrl = `http://localhost:8080/login`;
 const signUpUrl = `http://localhost:8080/signup`;
 const booksPostUrl = `http://localhost:8080/books`;
+const locationUrl = `http://localhost:8080/location`;
 const userUrl = `http://localhost:8080/user`;
 let storageToken = localStorage.getItem('token');
 let storageId = localStorage.getItem('userId');
@@ -60,6 +61,15 @@ class App extends Component {
           },
           () => {
             localStorage.setItem('userLatLng', this.state.userLatLng);
+            axios
+              .post(locationUrl, {
+                latitude: latitude,
+                longitude: longitude,
+                UserId: this.state.userId
+              })
+              .then(({ data }) => {
+                console.log(data);
+              });
           }
         );
       },
@@ -73,7 +83,8 @@ class App extends Component {
   getUserData() {
     axios
       .post(userUrl, {
-        id: storageId
+        id: storageId,
+        coords: this.state.userLatLng
       })
       .then(({ data }) => {
         console.log(data);
@@ -121,7 +132,7 @@ class App extends Component {
           user: data.user,
           errMsg: data.err
         });
-        this.getUserLocation()
+        this.getUserLocation();
         localStorage.setItem('token', this.state.loggedInToken);
         localStorage.setItem('userId', this.state.user.id);
       });
