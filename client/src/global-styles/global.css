@@ -1,223 +1,200 @@
-body {
-  background: #F7F7F7;
+@media (min-width: 481px) {
+  * {
+    display: none;
+  }
 }
 
-.login-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.login-container .login__logo {
-  margin: 15% 0 0 0;
-  width: 50%;
-}
-
-.login-container .login__h1 {
-  font-size: 3rem;
-  margin-top: 0;
-  color: #252728;
-}
-
-.login__form .login__form-input {
-  margin: 8% 0;
-  width: 75vw;
-  border: none;
-  border-bottom: 1px solid gray;
-  border-radius: 0;
-  background: #F7F7F7;
-  font-size: 1.3rem;
-}
-
-.login__form .login__button {
-  margin-top: 20%;
-  color: white;
-  font-weight: bold;
-  background: slategray;
-  border-color: gray;
-}
-
-.login-link,
-.signup-link {
-  display: block;
-  text-decoration: none;
-}
-
-.signup__form .signup-input {
-  margin: 8% 0;
-  width: 75vw;
-  border: none;
-  border-bottom: 1px solid gray;
-  border-radius: 0;
-  background: #F7F7F7;
-  font-size: 1.3rem;
-}
-
-.signup__form .button__signup {
-  display: block;
-  margin-top: 20%;
-  color: white;
-  font-weight: bold;
-  background: slategray;
-  border-color: gray;
-  width: 75vw;
-}
-
-.signup__form .button__cancel {
-  display: block;
-  color: white;
-  font-weight: bold;
-  background: #3f454d;
-  border-color: gray;
-  margin-top: 10%;
-  width: 75vw;
-}
-
-.search-container {
-  margin: 5% 0 0 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-}
-
-.search-container .search {
-  margin: 8% 0;
-  width: 75vw;
-  border: none;
-  border-bottom: 1px solid gray;
-  border-radius: 0;
-  background: #F7F7F7;
-  font-size: 1.3rem;
-  width: 70vw;
-}
-
-.search-container .cancel {
-  margin-left: 0%;
-}
-
-.search-container .cancel:active {
-  width: 1.6rem;
-}
-
-#Map {
-  height: 92vh;
-  width: 100vw;
-}
-
-.leaflet-touch .leaflet-bar {
-  position: fixed;
-  right: 32px;
-  bottom: 130px;
-}
-
-.mapSvg {
-  margin: 75% 0 0 8%;
-  width: 80%;
-}
-
-.Navbar {
-  position: fixed;
-  bottom: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100vw;
-  height: 8vh;
-  border-top: 1px solid gray;
-  background: rgba(232, 239, 243, 0.95);
-}
-
-.Navbar .nav-item img {
-  width: 2rem;
-}
-
-.Navbar .nav-item img:active {
-  margin-bottom: 10px;
-}
-
-.profile__h1 {
-  margin: 15% 0 0 5%;
-}
-
-.profileSvg {
-  margin: 50% 0 0 15%;
-  width: 80%;
-}
-
-.hello__h1 {
-  margin: 15% 0 0 5%;
-}
-
-.helloSvg {
-  margin: 50% 0 0 15%;
-  width: 75%;
-}
-
-.events__h1 {
-  margin: 15% 0 0 5%;
-}
-
-.eventsSvg {
-  margin: 50% 0 0 15%;
-  width: 75%;
-}
-
-.Home .bookSvg {
-  margin: 50% 0 0 15%;
-  width: 75%;
-}
-
-.card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  margin: 4% 4%;
-  -webkit-box-shadow: 0px 1px 10px 1px #FFFFFF;
-          box-shadow: 0px 1px 10px 1px #FFFFFF;
-}
-
-.card .img {
-  width: 128px;
-  height: 189px;
-}
-
-.card .addBtn {
-  max-width: 50px;
-  padding-right: 5%;
-  padding-top: 35%;
-}
-
-.card .addBtn:active {
-  width: 4.2rem;
-}
-
-.card .collapse {
-  height: 80vh;
+@media (max-width: 480px) {
+  body {
+    background: #F7F7F7;
+  }
+  .login-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .login-container .login__logo {
+    margin: 15% 0 0 0;
+    width: 50%;
+  }
+  .login-container .login__h1 {
+    font-size: 3rem;
+    margin-top: 0;
+    color: #252728;
+  }
+  .login__form .login__form-input {
+    margin: 8% 0;
+    width: 75vw;
+    border: none;
+    border-bottom: 1px solid gray;
+    border-radius: 0;
+    background: #F7F7F7;
+    font-size: 1.3rem;
+  }
+  .login__form .login__button {
+    margin-top: 20%;
+    color: white;
+    font-weight: bold;
+    background: slategray;
+    border-color: gray;
+  }
+  .login-link,
+  .signup-link {
+    display: block;
+    text-decoration: none;
+  }
+  .signup__form .signup-input {
+    margin: 8% 0;
+    width: 75vw;
+    border: none;
+    border-bottom: 1px solid gray;
+    border-radius: 0;
+    background: #F7F7F7;
+    font-size: 1.3rem;
+  }
+  .signup__form .button__signup {
+    display: block;
+    margin-top: 20%;
+    color: white;
+    font-weight: bold;
+    background: slategray;
+    border-color: gray;
+    width: 75vw;
+  }
+  .signup__form .button__cancel {
+    display: block;
+    color: white;
+    font-weight: bold;
+    background: #3f454d;
+    border-color: gray;
+    margin-top: 10%;
+    width: 75vw;
+  }
+  .search-container {
+    margin: 5% 0 0 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+  }
+  .search-container .search {
+    margin: 8% 0;
+    width: 75vw;
+    border: none;
+    border-bottom: 1px solid gray;
+    border-radius: 0;
+    background: #F7F7F7;
+    font-size: 1.3rem;
+    width: 70vw;
+  }
+  .search-container .cancel {
+    margin-left: 0%;
+  }
+  .search-container .cancel:active {
+    width: 1.6rem;
+  }
+  #Map {
+    height: 92vh;
+    width: 100vw;
+  }
+  .leaflet-touch .leaflet-bar {
+    position: fixed;
+    right: 32px;
+    bottom: 130px;
+  }
+  .mapSvg {
+    margin: 75% 0 0 8%;
+    width: 80%;
+  }
+  .Navbar {
+    position: fixed;
+    bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100vw;
+    height: 8vh;
+    border-top: 1px solid gray;
+    background: rgba(232, 239, 243, 0.95);
+  }
+  .Navbar .nav-item img {
+    width: 2rem;
+  }
+  .Navbar .nav-item img:active {
+    margin-bottom: 10px;
+  }
+  .profile__h1 {
+    margin: 15% 0 0 5%;
+  }
+  .profileSvg {
+    margin: 50% 0 0 15%;
+    width: 80%;
+  }
+  .hello__h1 {
+    margin: 15% 0 0 5%;
+  }
+  .helloSvg {
+    margin: 50% 0 0 15%;
+    width: 75%;
+  }
+  .events__h1 {
+    margin: 15% 0 0 5%;
+  }
+  .eventsSvg {
+    margin: 50% 0 0 15%;
+    width: 75%;
+  }
+  .Home .bookSvg {
+    margin: 50% 0 0 15%;
+    width: 75%;
+  }
+  .card {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    margin: 4% 4%;
+    -webkit-box-shadow: 0px 1px 10px 1px #FFFFFF;
+            box-shadow: 0px 1px 10px 1px #FFFFFF;
+  }
+  .card .img {
+    width: 128px;
+    height: 189px;
+  }
+  .card .addBtn {
+    max-width: 50px;
+    padding-right: 5%;
+    padding-top: 35%;
+  }
+  .card .addBtn:active {
+    width: 4.2rem;
+  }
+  .card .collapse {
+    height: 80vh;
+  }
 }
 /*# sourceMappingURL=global.css.map */

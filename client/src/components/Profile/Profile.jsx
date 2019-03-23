@@ -6,14 +6,16 @@ import Navbar from '../Navbar/Navbar';
 class Profile extends Component {
 
   render() {
-    const {user, books} = this.props
-    console.log(books)
-    // bookArray = books.map(book => {
-    // })
+    const {user, userBooks} = this.props
+    console.log(user, userBooks)
+
     return (
       <div> 
-        <h1 className="profile__h1">Profile {this.props.user.firstName}</h1>
+        <h1 className="profile__h1">Hey {user.firstName}!</h1>
         <Image className="profileSvg" src={profileSvg} />
+        <div>
+          {/* Your books: {bookArray} */}
+        </div>
         <Navbar />
       </div>
     );

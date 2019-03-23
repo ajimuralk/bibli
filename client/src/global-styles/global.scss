@@ -19,6 +19,13 @@
 $background-gray-lighter: #F7F7F7;
 $text-black: #252728;
 
+@media (min-width: 481px) {
+  * {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
 //PARTIALS
 @import '../components/LoginContainer/LoginContainer';
 @import '../components/LoginForm/LoginForm';
@@ -31,3 +38,6 @@ $text-black: #252728;
 @import '../components/Events/Events';
 @import '../components/Home/Home';
 @import '../components/Book/Book';
+
+}
+

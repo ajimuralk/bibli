@@ -31,6 +31,7 @@ class App extends Component {
     userId: '' || storageId,
     errMsg: '',
     user: {},
+    userBooks: [],
     books: [],
     signUpClicked: false,
     bookModalClicked: false
@@ -84,9 +85,11 @@ class App extends Component {
         coords: this.state.userLatLng
       })
       .then(({ data }) => {
-        console.log(data);
         this.setState({
-          user: data
+          user: data.user,
+          userBooks: data.books
+          // userLatLng: data.coords
+
         });
       });
   }
@@ -209,6 +212,8 @@ class App extends Component {
           />
           <Route path="/profile" render={() => <Profile 
              user={this.state.user}
+             userBooks={this.state.userBooks}
+             booksUrl={this.booksUrl}
             />} />
           <Route path="/hello" render={() => <Hello />} />
           <Route path="/events" render={() => <Events />} />
