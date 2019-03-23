@@ -12,7 +12,6 @@ const mapTile =
 class Nearby extends Component {
   render() {
     const { userLatLng } = this.props;
-    // if (userLatLng === '' || undefined) return <h4>Loading...</h4>;
 
     return (
       <div>

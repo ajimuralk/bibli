@@ -89,7 +89,6 @@ class App extends Component {
           user: data.user,
           userBooks: data.books
           // userLatLng: data.coords
-
         });
       });
   }

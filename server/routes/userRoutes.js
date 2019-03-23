@@ -7,7 +7,8 @@ const errMsg =
 router.route('/').post((req, res) => {
   const { id } = req.body;
   User.findOne({
-    where: { id }
+    where: { id },
+    attributes: {exclude: ['password']}
   }).then(user => {
     if (!user) {
       res.json({
