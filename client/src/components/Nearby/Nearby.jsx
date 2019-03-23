@@ -12,7 +12,7 @@ const mapTile =
 class Nearby extends Component {
   render() {
     const { userLatLng } = this.props;
-
+    
     return (
       <div>
         {!userLatLng ? (

@@ -14,7 +14,7 @@ router
         }
       }
     }).then(users => {
-      res.json({ users });
+      res.json(users);
     });
   })
 

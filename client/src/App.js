@@ -22,7 +22,8 @@ let storageId = localStorage.getItem('userId');
 let lastLatLng = localStorage.getItem('userLatLng');
 let default_viewport = [36.2048, 138.2019];
 
-const booksUrl = input => `http://localhost:8080/books?input=${input}`;
+const getUrl = (route, input) =>
+  `http://localhost:8080/${route}?input=${input}`;
 
 class App extends Component {
   state = {
@@ -33,6 +34,7 @@ class App extends Component {
     user: {},
     userBooks: [],
     books: [],
+    nearbyUsers: [],
     signUpClicked: false,
     bookModalClicked: false
   };
@@ -53,7 +55,7 @@ class App extends Component {
   getUserLocation = () => {
     navigator.geolocation.getCurrentPosition(
       success => {
-        let { latitude, longitude } = success.coords
+        let { latitude, longitude } = success.coords;
         this.setState(
           {
             userLatLng: [latitude, longitude]
@@ -78,6 +80,14 @@ class App extends Component {
     );
   };
 
+  findNearbyUsers = userId => {
+    axios.get(getUrl('location', userId)).then(({ data }) => {
+      this.setState({
+        nearbyUsers: data
+      });
+    });
+  };
+
   getUserData() {
     axios
       .post(userUrl, {
@@ -85,17 +95,18 @@ class App extends Component {
         coords: this.state.userLatLng
       })
       .then(({ data }) => {
+        const { latitude, longitude } = data.coords;
         this.setState({
           user: data.user,
-          userBooks: data.books
-          // userLatLng: data.coords
+          userBooks: data.books,
+          userLatLng: [latitude, longitude]
         });
       });
   }
 
   findBooks = input => {
     axios
-      .get(booksUrl(input))
+      .get(getUrl('books', input))
       .then(({ data }) => {
         this.setState({
           books: data
@@ -207,13 +218,23 @@ class App extends Component {
           />
           <Route
             path="/map"
-            render={() => <Nearby userLatLng={this.state.userLatLng} />}
+            render={() => (
+              <Nearby
+                userLatLng={this.state.userLatLng}
+                nearbyUsers={this.state.nearbyUsers}
+              />
+            )}
           />
-          <Route path="/profile" render={() => <Profile 
-             user={this.state.user}
-             userBooks={this.state.userBooks}
-             booksUrl={this.booksUrl}
-            />} />
+          <Route
+            path="/profile"
+            render={() => (
+              <Profile
+                user={this.state.user}
+                userBooks={this.state.userBooks}
+                booksUrl={this.booksUrl}
+              />
+            )}
+          />
           <Route path="/hello" render={() => <Hello />} />
           <Route path="/events" render={() => <Events />} />
         </Switch>

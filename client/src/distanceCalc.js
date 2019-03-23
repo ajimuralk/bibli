@@ -1,6 +1,6 @@
 //Haversine Formula -- Calculates great-circle distances on a sphere between two coordinates
 
-module.exports = distanceCalc = (lat1, lon1, lat2, lon2) => {
+const distanceCalc = (lat1, lon1, lat2, lon2) => {
   const p = 0.017453292519943295, // Math.PI / 180
     c = Math.cos,
     a =
@@ -20,3 +20,4 @@ module.exports = distanceCalc = (lat1, lon1, lat2, lon2) => {
 
 // console.log(coords.toFixed(2));
 
+export default distanceCalc;
