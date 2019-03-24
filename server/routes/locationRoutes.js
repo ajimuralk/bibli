@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Location } = require('../models');
+const { Location, Book, UserBook, User } = require('../models');
 const sequelize = require('sequelize');
 
 router
@@ -14,7 +14,18 @@ router
         }
       }
     }).then(users => {
-      res.json(users);
+      if (!users) {
+        res.send('No nearby users');
+      } else {
+        res.json(users);
+        // let id = users.UserId;
+        // console.log(id);
+        // User.findAll({
+        //   include: { model: Book, include: ['UserId'] }
+        // }).then(books => {
+        //   res.json( users, books);
+        // });
+      }
     });
   })
 

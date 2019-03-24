@@ -42,6 +42,7 @@ class App extends Component {
   componentDidMount() {
     if (this.state.loggedInToken) {
       this.getUserData();
+      this.findNearbyUsers(this.state.userId)
       return <Home />;
     }
   }
@@ -64,13 +65,13 @@ class App extends Component {
             localStorage.setItem('userLatLng', this.state.userLatLng);
             axios
               .post(locationUrl, {
-                latitude: latitude,
-                longitude: longitude,
+                latitude,
+                longitude,
                 UserId: this.state.userId
               })
-              .then(({ data }) => {
-                console.log(data);
-              });
+              // .then(({ data }) => {
+              //   console.log(data);
+              // });
           }
         );
       },
