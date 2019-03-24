@@ -18,13 +18,6 @@ router
         res.send('No nearby users');
       } else {
         res.json(users);
-        // let id = users.UserId;
-        // console.log(id);
-        // User.findAll({
-        //   include: { model: Book, include: ['UserId'] }
-        // }).then(books => {
-        //   res.json( users, books);
-        // });
       }
     });
   })

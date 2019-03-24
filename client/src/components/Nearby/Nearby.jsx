@@ -42,7 +42,7 @@ class Nearby extends Component {
 
     return (
       <div>
-        {!userLatLng ? (
+        {(!userLatLng) ? (
           <>
             <Image className="mapSvg" src={mapSvg} />
             <Navbar />

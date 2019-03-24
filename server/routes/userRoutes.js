@@ -35,7 +35,7 @@ router
   const {id} = req.body;
   console.log(req.body)
   Location.destroy({
-    where: {UserId: id}
+    where: {userId: id}
   })
   res.send(`Location deleted for user: ${id}`)
 })

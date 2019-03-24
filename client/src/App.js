@@ -42,7 +42,7 @@ class App extends Component {
   componentDidMount() {
     if (this.state.loggedInToken) {
       this.getUserData();
-      this.findNearbyUsers(this.state.userId)
+      this.findNearbyUsers(this.state.userId);
       return <Home />;
     }
   }
@@ -69,9 +69,9 @@ class App extends Component {
                 longitude,
                 UserId: this.state.userId
               })
-              // .then(({ data }) => {
-              //   console.log(data);
-              // });
+              .then(({ data }) => {
+                console.log(data);
+              });
           }
         );
       },
@@ -96,8 +96,9 @@ class App extends Component {
         coords: this.state.userLatLng
       })
       .then(({ data }) => {
-        if(data.coords === null) return 'Loading...'
+        if (data.coords === null) return 'Loading...';
         const { latitude, longitude } = data.coords;
+        console.log(data);
         this.setState({
           user: data.user,
           userBooks: data.books,
@@ -186,13 +187,12 @@ class App extends Component {
       });
   };
 
-  signOut = (id) => {
-    axios.delete(userUrl, {data: {id}}).then(({data}) => {
-      console.log(data)
+  signOut = id => {
+    axios.delete(userUrl, { data: { id } }).then(({ data }) => {
+      console.log(data);
       localStorage.clear();
-    })
-
-  }
+    });
+  };
 
   render() {
     return (
