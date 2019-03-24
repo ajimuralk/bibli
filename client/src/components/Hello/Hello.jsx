@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Image from 'react-bootstrap/Image';
-import helloSvg from '../../assets/svg/undraw_personal_notes_8n63.svg';
+import helloSvg from '../../assets/svg/undraw_on_the_office_fbfs.svg';
 import Navbar from '../Navbar/Navbar';
 
 class Hello extends Component {

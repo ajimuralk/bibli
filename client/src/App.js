@@ -96,6 +96,7 @@ class App extends Component {
         coords: this.state.userLatLng
       })
       .then(({ data }) => {
+        if(data.coords === null) return 'Loading...'
         const { latitude, longitude } = data.coords;
         this.setState({
           user: data.user,
@@ -185,6 +186,14 @@ class App extends Component {
       });
   };
 
+  signOut = (id) => {
+    axios.delete(userUrl, {data: {id}}).then(({data}) => {
+      console.log(data)
+      localStorage.clear();
+    })
+
+  }
+
   render() {
     return (
       <div className="App">
@@ -233,6 +242,7 @@ class App extends Component {
                 user={this.state.user}
                 userBooks={this.state.userBooks}
                 booksUrl={this.booksUrl}
+                signOut={this.signOut}
               />
             )}
           />

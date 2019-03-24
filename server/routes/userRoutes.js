@@ -4,7 +4,9 @@ const { User, Book, UserBook, Location } = require('../models');
 const errMsg =
   "The email or password you entered couldn't be verified. Please try again.";
 
-router.route('/').post((req, res) => {
+router
+.route('/')
+.post((req, res) => {
   const { id } = req.body;
   User.findOne({
     where: { id },
@@ -28,6 +30,14 @@ router.route('/').post((req, res) => {
       });
     }
   });
-});
+})
+.delete((req, res) => {
+  const {id} = req.body;
+  console.log(req.body)
+  Location.destroy({
+    where: {UserId: id}
+  })
+  res.send(`Location deleted for user: ${id}`)
+})
 
 module.exports = router;

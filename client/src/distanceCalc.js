@@ -11,13 +11,4 @@ const distanceCalc = (lat1, lon1, lat2, lon2) => {
   return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
 };
 
-// let lat1 = 49.258421999999996,
-//   lon1 = -123.1010086,
-//   lat2 = 49.285,
-//   lon2 = -123.114;
-
-// const coords = distanceCalc(lat1, lon1, lat2, lon2);
-
-// console.log(coords.toFixed(2));
-
 export default distanceCalc;

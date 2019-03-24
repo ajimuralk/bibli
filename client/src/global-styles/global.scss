@@ -18,6 +18,7 @@
 //VARIABLES
 $background-gray-lighter: #F7F7F7;
 $text-black: #252728;
+$nav-blue: #e8eef2;
 
 @media (min-width: 481px) {
   * {
@@ -26,11 +27,12 @@ $text-black: #252728;
 }
 
 @media (max-width: 480px) {
+  
 //PARTIALS
 @import '../components/LoginContainer/LoginContainer';
-@import '../components/LoginForm/LoginForm';
 @import '../components/SignUpForm/SignUpForm';
 @import '../components/SearchForm/SearchForm';
+@import '../components/LoginForm/LoginForm';
 @import '../components/Nearby/Nearby';
 @import '../components/Navbar/Navbar';
 @import '../components/Profile/Profile';

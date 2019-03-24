@@ -2,6 +2,20 @@
   margin: 15% 0 0 5%;
 }
 .profileSvg {
-  margin: 50% 0 0 15%;
+  margin: 50% 0 0 10%;
   width: 80%;
 }
+
+.signOut {
+  display: flex;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 1% 0;
+  margin: 25% 30%;
+  background: $nav-blue;
+  color: $text-black;
+  border-radius: 5px;
+  // border: 1px solid gray;
+}
+

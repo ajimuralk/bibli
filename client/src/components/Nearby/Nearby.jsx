@@ -8,7 +8,7 @@ import distanceCalc from '../../distanceCalc';
 const lightMap =
   'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png';
 const mapTile =
-  '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>';
+  '&copy; <a href="#">OpenStreetMap</a>, &copy; <a href="#">CARTO</a>';
 
 class Nearby extends Component {
   click = ref => {};
@@ -19,12 +19,13 @@ class Nearby extends Component {
     const nearbyList = this.props.nearbyUsers
       .filter(user => {
         return (
+          //Display users who are within 200m
           distanceCalc(
             userLatLng[0],
             userLatLng[1],
             user.latitude,
             user.longitude
-          ) < .2
+          ) < 0.2
         );
       })
       .map((user, i) => {
@@ -38,14 +39,6 @@ class Nearby extends Component {
           </Marker>
         );
       });
-
-    console.log(
-      distanceCalc(
-        userLatLng[0],
-        userLatLng[1],
-        49.258518699999996,
-        -123.10102339999999
-    ));
 
     return (
       <div>
