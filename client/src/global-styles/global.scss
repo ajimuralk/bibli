@@ -33,7 +33,9 @@ $background-gray-lighter: #F7F7F7;
 $text-black: #252728;
 $nav-blue: #e8eef2;
 
-
+body {
+  overscroll-behavior-y: contain;
+}
 
 //PARTIALS
 @import '../components/LoginContainer/LoginContainer';

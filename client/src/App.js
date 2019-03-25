@@ -84,6 +84,7 @@ class App extends Component {
 
   findNearbyUsers = userId => {
     axios.get(getUrl('location', userId)).then(({ data }) => {
+      console.log(data)
       this.setState({
         nearbyUsers: data
       });

@@ -1,4 +1,8 @@
 body {
+  overscroll-behavior-y: contain;
+}
+
+body {
   background: #F7F7F7;
 }
 
@@ -165,6 +169,10 @@ body {
 #Map {
   height: 92vh;
   width: 100vw;
+}
+
+#Map .refresh {
+  z-index: 10000;
 }
 
 .leaflet-touch .leaflet-bar {
