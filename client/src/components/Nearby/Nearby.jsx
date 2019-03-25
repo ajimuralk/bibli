@@ -55,9 +55,8 @@ class Nearby extends Component {
         ) : (
           <>
             <Map center={userLatLng} zoom="18" id="Map" animate="true">
-
+            {/* <Image src={refreshSvg} className='refresh'/> */}
               <TileLayer url={lightMap} attribution={mapTile} />
-              {/* <Image className="refresh" src={refreshSvg}/> */}
               {nearbyList}
               {/* <Marker position={userLatLng}>
                 <Popup> You are here</Popup>

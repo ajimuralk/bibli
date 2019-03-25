@@ -1,6 +1,9 @@
 #Map {
   height: 92vh;
   width: 100vw;
+  .refresh {
+    z-index: 10000;
+  }
 }
 
 .leaflet-touch .leaflet-bar {

@@ -5,39 +5,39 @@ const errMsg =
   "The email or password you entered couldn't be verified. Please try again.";
 
 router
-.route('/')
-.post((req, res) => {
-  const { id } = req.body;
-  User.findOne({
-    where: { id },
-    attributes: {exclude: ['password']}
-  }).then(user => {
-    if (!user) {
-      res.json({
-        success: false,
-        err: errMsg
-      });
-    } else {
-      let userId = user.id;
-      UserBook.findAll({
-        where: { userId }
-      }).then(books => {
-        Location.findOne({
-          where: { userId }
-        }).then(coords => {
-          res.json({ user, books, coords });
+  .route('/')
+  .post((req, res) => {
+    const { id } = req.body;
+    User.findOne({
+      where: { id },
+      attributes: { exclude: ['password'] }
+    }).then(user => {
+      if (!user) {
+        res.json({
+          success: false,
+          err: errMsg
         });
-      });
-    }
-  });
-})
-.delete((req, res) => {
-  const {id} = req.body;
-  console.log(req.body)
-  Location.destroy({
-    where: {userId: id}
+      } else {
+        let userId = user.id;
+        UserBook.findAll({
+          where: { userId }
+        }).then(books => {
+          Location.findOne({
+            where: { userId }
+          }).then(coords => {
+            res.json({ user, books, coords });
+          });
+        });
+      }
+    });
   })
-  res.send(`Location deleted for user: ${id}`)
-})
+  .delete((req, res) => {
+    const { id } = req.body;
+    console.log(req.body);
+    Location.destroy({
+      where: { userId: id }
+    });
+    res.send(`Location deleted for user: ${id}`);
+  });
 
 module.exports = router;
