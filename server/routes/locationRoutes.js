@@ -23,7 +23,7 @@ router
   })
   .post((req, res) => {
     const { latitude, longitude, UserId } = req.body;
-    Location.findOrCreate({ where: { id: UserId } }).spread(
+    Location.findOrCreate({ where: { UserId } }).spread(
       (result, shouldCreateInstance) => {
         if (shouldCreateInstance) {
           Location.create({

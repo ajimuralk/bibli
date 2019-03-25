@@ -50,7 +50,6 @@ class App extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextState);
     if (nextState.userLatLng !== this.getUserLocation()) {
       return true;
     }
@@ -65,7 +64,6 @@ class App extends Component {
             userLatLng: [latitude, longitude]
           },
           () => {
-            console.log(this.state.user);
             localStorage.setItem('userLatLng', this.state.userLatLng);
             axios
               .post(locationUrl, {
@@ -73,9 +71,9 @@ class App extends Component {
                 longitude,
                 UserId: this.state.userId
               })
-              .then(({ data }) => {
-                console.log(data);
-              });
+              // .then(({ data }) => {
+              //   console.log(data);
+              // });
           }
         );
       },
@@ -197,7 +195,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.user);
     return (
       <div className="App">
         <MediaQuery query="(min-width: 481px)">
