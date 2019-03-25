@@ -8,6 +8,8 @@ import Hello from './components/Hello/Hello';
 import Profile from './components/Profile/Profile';
 import './global-styles/global.css';
 import Events from './components/Events/Events';
+import MediaQuery from 'react-responsive';
+import DesktopMsg from './components/DesktopMsg/DeskstopMsg';
 
 // import openSocket from 'socket.io-client';
 // const socket = openSocket('http://localhost:8080');
@@ -44,10 +46,11 @@ class App extends Component {
       this.getUserData();
       this.findNearbyUsers(this.state.userId);
       return <Home />;
-    }
+    } else return;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextState);
     if (nextState.userLatLng !== this.getUserLocation()) {
       return true;
     }
@@ -62,6 +65,7 @@ class App extends Component {
             userLatLng: [latitude, longitude]
           },
           () => {
+            console.log(this.state.user);
             localStorage.setItem('userLatLng', this.state.userLatLng);
             axios
               .post(locationUrl, {
@@ -96,9 +100,8 @@ class App extends Component {
         coords: this.state.userLatLng
       })
       .then(({ data }) => {
-        if (data.coords === null) return 'Loading...';
+        if (data.coords === null) return;
         const { latitude, longitude } = data.coords;
-        console.log(data);
         this.setState({
           user: data.user,
           userBooks: data.books,
@@ -189,66 +192,72 @@ class App extends Component {
 
   signOut = id => {
     axios.delete(userUrl, { data: { id } }).then(({ data }) => {
-      console.log(data);
       localStorage.clear();
     });
   };
 
   render() {
+    console.log(this.state.user);
     return (
       <div className="App">
-        <Switch>
-          {!this.state.loggedInToken && (
+        <MediaQuery query="(min-width: 481px)">
+          <DesktopMsg />
+        </MediaQuery>
+
+        <MediaQuery query="(max-width: 480px)">
+          <Switch>
+            {!this.state.loggedInToken && (
+              <Route
+                path="/"
+                render={() => (
+                  <LoginContainer
+                    login={this.login}
+                    signUp={this.signUp}
+                    toggleSignUp={this.toggleSignUp}
+                    signUpClicked={this.state.signUpClicked}
+                  />
+                )}
+              />
+            )}
             <Route
               path="/"
+              exact
               render={() => (
-                <LoginContainer
-                  login={this.login}
-                  signUp={this.signUp}
-                  toggleSignUp={this.toggleSignUp}
-                  signUpClicked={this.state.signUpClicked}
+                <Home
+                  toggleBookModal={this.toggleBookModal}
+                  bookModalClicked={this.state.bookModalClicked}
+                  postBook={this.postBook}
+                  findBooks={this.findBooks}
+                  cancelSearch={this.cancelSearch}
+                  books={this.state.books}
+                  user={this.state.user}
                 />
               )}
             />
-          )}
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <Home
-                toggleBookModal={this.toggleBookModal}
-                bookModalClicked={this.state.bookModalClicked}
-                postBook={this.postBook}
-                findBooks={this.findBooks}
-                cancelSearch={this.cancelSearch}
-                books={this.state.books}
-                user={this.state.user}
-              />
-            )}
-          />
-          <Route
-            path="/map"
-            render={() => (
-              <Nearby
-                userLatLng={this.state.userLatLng}
-                nearbyUsers={this.state.nearbyUsers}
-              />
-            )}
-          />
-          <Route
-            path="/profile"
-            render={() => (
-              <Profile
-                user={this.state.user}
-                userBooks={this.state.userBooks}
-                booksUrl={this.booksUrl}
-                signOut={this.signOut}
-              />
-            )}
-          />
-          <Route path="/hello" render={() => <Hello />} />
-          <Route path="/events" render={() => <Events />} />
-        </Switch>
+            <Route
+              path="/map"
+              render={() => (
+                <Nearby
+                  userLatLng={this.state.userLatLng}
+                  nearbyUsers={this.state.nearbyUsers}
+                />
+              )}
+            />
+            <Route
+              path="/profile"
+              render={() => (
+                <Profile
+                  user={this.state.user}
+                  userBooks={this.state.userBooks}
+                  booksUrl={this.booksUrl}
+                  signOut={this.signOut}
+                />
+              )}
+            />
+            <Route path="/hello" render={() => <Hello />} />
+            <Route path="/events" render={() => <Events />} />
+          </Switch>
+        </MediaQuery>
       </div>
     );
   }

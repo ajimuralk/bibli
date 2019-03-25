@@ -1,0 +1,17 @@
+.desktop-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .desktop__header {
+    font-size: 5rem;
+    margin: 5% 0 2% 0 ;
+  }
+  .desktop__sub-header {
+    font-size: 1.6rem;
+  }
+  .desktop__img {
+    width: 60%;
+  }
+}

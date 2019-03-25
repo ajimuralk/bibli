@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../Navbar/Navbar';
 import mapSvg from '../../assets/svg/undraw_directions_x53j (1).svg';
+import refreshSvg from '../../assets/icons/refresh-cw.svg';
 import Image from 'react-bootstrap/Image';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import distanceCalc from '../../distanceCalc';
@@ -11,7 +12,6 @@ const mapTile =
   '&copy; <a href="#">OpenStreetMap</a>, &copy; <a href="#">CARTO</a>';
 
 class Nearby extends Component {
-  click = ref => {};
 
   render() {
     const { userLatLng } = this.props;
@@ -50,7 +50,9 @@ class Nearby extends Component {
         ) : (
           <>
             <Map center={userLatLng} zoom="18" id="Map" animate="true">
+
               <TileLayer url={lightMap} attribution={mapTile} />
+              {/* <Image className="refresh" src={refreshSvg}/> */}
               {nearbyList}
               {/* <Marker position={userLatLng}>
                 <Popup> You are here</Popup>

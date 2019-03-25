@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 class Profile extends Component {
   render() {
     const { user } = this.props;
-    console.log(user)
     return (
       <div>
         <h1 className="profile__h1">{user.firstName}</h1>
