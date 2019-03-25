@@ -15,25 +15,26 @@
   font-size: 1.3rem;
 }
 @mixin flash-msg($background-color, $font-color) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: $background-color;
-    color:  $font-color;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 4%;
-    width: 100vw;
-    height: 5vh;
-    transition: 5s ease-in-out;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $background-color;
+  color: $font-color;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 4%;
+  width: 100vw;
+  height: 5vh;
+  transition: all 1s ease-out;
 }
 
 //VARIABLES
-$background-gray-lighter: #F7F7F7;
+$background-gray-lighter: #f7f7f7;
 $text-black: #252728;
 $nav-blue: #e8eef2;
-
-
 
 //PARTIALS
 @import '../components/LoginContainer/LoginContainer';
@@ -48,4 +49,3 @@ $nav-blue: #e8eef2;
 @import '../components/Events/Events';
 @import '../components/Home/Home';
 @import '../components/Book/Book';
-

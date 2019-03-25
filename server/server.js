@@ -19,6 +19,18 @@ app.use('/login', loginRoutes);
 app.use('/user', userRoutes);
 app.use('/location', locationRoutes);
 
+// app.get('/service-worker.js', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
+// });
+
+// app.route({
+//   method: 'GET',
+//   path: '/{path*}',
+//   handler: {
+//     file: 'index.html',
+//   },
+// })
+
 app.listen(PORT, () => {
   console.log(`Listening on PORT: ${PORT}`);
 });

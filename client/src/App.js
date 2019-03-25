@@ -44,7 +44,7 @@ class App extends Component {
   componentDidMount() {
     if (this.state.loggedInToken) {
       this.getUserData();
-      this.findNearbyUsers(this.state.userId);
+      this.findNearbyUsers(storageId);
       return <Home />;
     } else return;
   }
@@ -68,7 +68,7 @@ class App extends Component {
             axios.post(locationUrl, {
               latitude,
               longitude,
-              UserId: this.state.userId
+              UserId: storageId
             });
             // .then(({ data }) => {
             //   console.log(data);
@@ -194,15 +194,17 @@ class App extends Component {
   };
 
   signUp = (firstName, lastName, email, password) => {
-    if (!(firstName || lastName) && !(email || password))
+    if (!(firstName || lastName) && !(email || password)) {
       this.setState({
         errMsg: 'Please complete all fields'
       });
-    setTimeout(() => {
-      this.setState({
-        errMsg: ''
-      });
-    }, 3000);
+      setTimeout(() => {
+        this.setState({
+          errMsg: ''
+        });
+      }, 3000);
+      return;
+    }
     axios
       .post(signUpUrl, {
         firstName,

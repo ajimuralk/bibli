@@ -16,6 +16,6 @@ body {
   }
 
   .login-error {
-    @include flash-msg(rgb(231, 154, 154), $text-black)
+    @include flash-msg (#E79A9A, $text-black)
   }
 }
