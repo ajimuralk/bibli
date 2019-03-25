@@ -14,6 +14,19 @@
   background: $background-gray-lighter;
   font-size: 1.3rem;
 }
+@mixin flash-msg($background-color, $font-color) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $background-color;
+    color:  $font-color;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 4%;
+    width: 100vw;
+    height: 5vh;
+    transition: 5s ease-in-out;
+}
 
 //VARIABLES
 $background-gray-lighter: #F7F7F7;

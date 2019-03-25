@@ -8,7 +8,7 @@ class Book extends Component {
     const { ...book } = this.props;
     return (
       <div>
-        <Card onClick={() => this.props.toggleBookModal()}>
+        <Card>
           <Card.Img
             variant="top"
             src={book.image}

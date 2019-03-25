@@ -9,6 +9,9 @@ class Login extends Component {
   render() {
     return (
       <div className="login-container">
+
+      {(this.props.errMsg) && (<div className="login-error">{this.props.errMsg}</div>)}
+
         <Image className="login__logo" src={logo} />
         <h1 className="login__h1">b i b l i</h1>
 

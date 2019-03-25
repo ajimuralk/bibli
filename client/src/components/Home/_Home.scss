@@ -3,5 +3,8 @@
     margin: 50% 0 0 15%;
     width: 75%;
   }
-}
 
+  .add-book-msg {
+    @include flash-msg(#d2e6ee, $text-black);
+  }
+}

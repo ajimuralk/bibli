@@ -6,7 +6,7 @@ body {
   @include form-container;
 
   .login__logo {
-    margin: 15% 0 0 0;
+    margin: 10% 0 0 0;
     width: 50%;
   }
   .login__h1 {
@@ -15,4 +15,7 @@ body {
     color: $text-black;
   }
 
+  .login-error {
+    @include flash-msg(rgb(231, 154, 154), $text-black)
+  }
 }

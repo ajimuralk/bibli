@@ -65,15 +65,14 @@ class App extends Component {
           },
           () => {
             localStorage.setItem('userLatLng', this.state.userLatLng);
-            axios
-              .post(locationUrl, {
-                latitude,
-                longitude,
-                UserId: this.state.userId
-              })
-              // .then(({ data }) => {
-              //   console.log(data);
-              // });
+            axios.post(locationUrl, {
+              latitude,
+              longitude,
+              UserId: this.state.userId
+            });
+            // .then(({ data }) => {
+            //   console.log(data);
+            // });
           }
         );
       },
@@ -128,7 +127,15 @@ class App extends Component {
 
   login = (email, password) => {
     if (!email || !password) {
-      return alert('Must fill out all fields');
+      this.setState({
+        errMsg: 'Invalid username/password'
+      });
+      setTimeout(() => {
+        this.setState({
+          errMsg: ''
+        });
+      }, 3000);
+      return;
     }
     axios
       .post(loginUrl, {
@@ -137,7 +144,14 @@ class App extends Component {
       })
       .then(({ data }) => {
         if (data.success === false) {
-          alert('Username/Password mismatch');
+          this.setState({
+            errMsg: 'Invalid username/password'
+          });
+          setTimeout(() => {
+            this.setState({
+              errMsg: ''
+            });
+          }, 3000);
           return;
         }
         this.setState({
@@ -165,6 +179,10 @@ class App extends Component {
         book
       })
       .then(res => {
+        this.toggleBookModal();
+        setTimeout(() => {
+          this.toggleBookModal();
+        }, 2000);
         console.log(res.data);
       });
   };
@@ -176,6 +194,15 @@ class App extends Component {
   };
 
   signUp = (firstName, lastName, email, password) => {
+    if (!(firstName || lastName) && !(email || password))
+      this.setState({
+        errMsg: 'Please complete all fields'
+      });
+    setTimeout(() => {
+      this.setState({
+        errMsg: ''
+      });
+    }, 3000);
     axios
       .post(signUpUrl, {
         firstName,
@@ -184,12 +211,27 @@ class App extends Component {
         password
       })
       .then(({ data }) => {
-        console.log(data);
+        if (data.success === false) {
+          this.setState({
+            errMsg: 'Email address already exists'
+          });
+          setTimeout(() => {
+            this.setState({
+              errMsg: ''
+            });
+          }, 3000);
+        }
       });
   };
 
   signOut = id => {
     axios.delete(userUrl, { data: { id } }).then(({ data }) => {
+      this.setState({
+        loggedInToken: '',
+        userLatLng: '',
+        userBooks: [],
+        userId: ''
+      });
       localStorage.clear();
     });
   };
@@ -212,6 +254,7 @@ class App extends Component {
                     signUp={this.signUp}
                     toggleSignUp={this.toggleSignUp}
                     signUpClicked={this.state.signUpClicked}
+                    errMsg={this.state.errMsg}
                   />
                 )}
               />

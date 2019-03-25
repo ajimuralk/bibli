@@ -19,7 +19,7 @@ body {
 }
 
 .login-container .login__logo {
-  margin: 15% 0 0 0;
+  margin: 10% 0 0 0;
   width: 50%;
 }
 
@@ -27,6 +27,27 @@ body {
   font-size: 3rem;
   margin-top: 0;
   color: #252728;
+}
+
+.login-container .login-error {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #e79a9a;
+  color: #252728;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 4%;
+  width: 100vw;
+  height: 5vh;
+  -webkit-transition: 5s ease-in-out;
+  transition: 5s ease-in-out;
 }
 
 .desktop-container {
@@ -178,6 +199,12 @@ body {
   background: #e8eef2;
 }
 
+.Navbar .activeRoute {
+  border-bottom: 4px #92c8e7 solid;
+  margin-top: 10px;
+  padding-bottom: 5px;
+}
+
 .Navbar .nav-item img {
   width: 2rem;
 }
@@ -232,6 +259,27 @@ body {
 .Home .bookSvg {
   margin: 50% 0 0 15%;
   width: 75%;
+}
+
+.Home .add-book-msg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #d2e6ee;
+  color: #252728;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 4%;
+  width: 100vw;
+  height: 5vh;
+  -webkit-transition: 5s ease-in-out;
+  transition: 5s ease-in-out;
 }
 
 .card {

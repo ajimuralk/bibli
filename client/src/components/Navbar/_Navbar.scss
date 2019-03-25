@@ -9,6 +9,13 @@
   height: 8vh;
   border-top: 1px solid gray;
   background: $nav-blue;
+
+  .activeRoute {
+    border-bottom: 4px rgb(146, 200, 231) solid;
+    margin-top: 10px;
+    padding-bottom: 5px;
+  }
+
   .nav-item {
     img {
       width: 2rem;

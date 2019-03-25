@@ -9,7 +9,11 @@ router.route('/').post((req, res) => {
   User.findOne({
     where: { email }
   }).then(user => {
-    if (user) res.json({ err: `${email} is already in use.` });
+    if (user)
+      res.json({
+        success: false,
+        err: `${email} is already in use.`
+      });
     else
       bcrypt.hash(password, saltRounds, (err, hash) => {
         if (err) console.log(err);

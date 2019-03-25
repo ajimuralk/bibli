@@ -7,8 +7,12 @@ import bookSvg from '../../assets/svg/undraw_book_lover_mkck.svg';
 
 class Home extends Component {
   render() {
+
     return (
       <div className="Home">
+
+      {(this.props.bookModalClicked) && (<div className="add-book-msg">Added to your booklist!</div>)}
+
         <SearchForm
           findBooks={this.props.findBooks}
           cancelSearch={this.props.cancelSearch}
@@ -19,8 +23,6 @@ class Home extends Component {
         <BookList
           books={this.props.books}
           postBook={this.props.postBook}
-          toggleBookModal={this.props.toggleBookModal}
-          bookModalClicked={this.props.bookModalClicked}
         />
         <Navbar />
       </div>

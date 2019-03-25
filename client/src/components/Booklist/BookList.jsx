@@ -9,8 +9,6 @@ class BookList extends Component {
           {...book}
           key={i}
           postBook={this.props.postBook}
-          bookModalClicked={this.props.bookModalClicked}
-          toggleBookModal={this.props.toggleBookModal}
         />
       );
     });
