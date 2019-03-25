@@ -17,12 +17,23 @@ router
       if (!users) {
         res.send('No nearby users');
       } else {
-        res.json(users);
+        let dataObj = {}
+
+        // users.map(user => {
+        //   UserBook.findAll({
+        //     where: {UserId: user.UserId}
+        //   }).then(data => {
+        //     res.json(ata);
+        //   })
+        // })
+        res.json(users)
+
       }
     });
   })
   .post((req, res) => {
     const { latitude, longitude, UserId } = req.body;
+
     Location.findOrCreate({ where: { UserId } }).spread(
       (result, shouldCreateInstance) => {
         if (shouldCreateInstance) {
@@ -32,15 +43,15 @@ router
             UserId
           });
           res.json(result);
-        } else {
-          Location.update({ latitude, longitude }, { where: { UserId } })
-            .then(locationResult => {
-              res.json({
-                update: `true`
-              });
-            })
-            .catch(err => console.log(err));
         }
+        if (result._previousDataValues === result.dataValues) return;
+        Location.update({ latitude, longitude }, { where: { UserId } })
+          .then(locationResult => {
+            res.json({
+              update: `true`
+            });
+          })
+          .catch(err => console.log(err));
       }
     );
   });
