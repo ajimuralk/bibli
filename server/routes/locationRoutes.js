@@ -35,7 +35,11 @@ router
             }
           )
           .then(results => {
-            res.json(results);
+            let userObj = {}
+            results.map(user => {
+              Object.assign(userObj, user)
+            })
+            res.json([userObj]);
           });
       }
     });

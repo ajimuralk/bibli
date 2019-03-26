@@ -40,7 +40,7 @@ class App extends Component {
   componentDidMount() {
     if (this.state.loggedInToken) {
       this.getUserData();
-      this.findNearbyUsers(storageId);
+      this.findNearbyUsers(this.state.user.id);
       return <Home />;
     } else return;
   }
@@ -64,7 +64,7 @@ class App extends Component {
             axios.post(locationUrl, {
               latitude,
               longitude,
-              UserId: storageId
+              UserId: this.state.user.id
             });
           }
         );
@@ -92,11 +92,18 @@ class App extends Component {
       })
       .then(({ data }) => {
         console.log(data)
-        if (data.coords === null) return;
-        const { latitude, longitude } = data.coords;
+        if (data === null) return;
+        const { firstName, lastName, id, latitude, longitude, title, author } = data;
         this.setState({
-          user: data.user,
-          userBooks: data.books,
+          user: {
+            firstName,
+            lastName,
+            id
+          },
+          userBooks: {
+            title, 
+            author 
+          },
           userLatLng: [latitude, longitude]
         });
       });
@@ -138,6 +145,7 @@ class App extends Component {
         password
       })
       .then(({ data }) => {
+        console.log(data)
         if (data.success === false) {
           this.setState({
             errMsg: 'Invalid username/password'

@@ -6,11 +6,15 @@ import { Link } from 'react-router-dom';
 
 class Profile extends Component {
   render() {
-    const { user } = this.props;
+    const { user, userBooks } = this.props;
+    console.log(userBooks)
     return (
       <div>
         <h1 className="profile__h1">{user.firstName}</h1>
+        <h5>Currently reading: {userBooks.title} by {userBooks.author}</h5>
         <Image className="profileSvg" src={profileSvg} />
+        
+
         <div>{/* Your books: {bookArray} */}</div>
 
         <Link

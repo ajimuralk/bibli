@@ -40,12 +40,12 @@ class Nearby extends Component {
                   center={{lat:user.latitude, lng: user.longitude}}
                   fillColor="white" 
                   radius={15}/>
-            <Popup>{user.UserId}</Popup>
+            <Popup>{user.title} by {user.author}</Popup>
           </Marker>
         );
       });
-
     return (
+
       <div>
         {(!userLatLng) ? (
           <>
@@ -55,7 +55,6 @@ class Nearby extends Component {
         ) : (
           <>
             <Map center={userLatLng} zoom="18" id="Map" animate="true">
-            {/* <Image src={refreshSvg} className='refresh'/> */}
               <TileLayer url={lightMap} attribution={mapTile} />
               {nearbyList}
               <Marker position={userLatLng} fillColor="red"> 
