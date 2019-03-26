@@ -13,7 +13,7 @@ class SearchForm extends Component {
           className="search"
           placeholder="Search by author or title"
           ref={self => (this.searchField = self)}
-          onChange={() => this.props.findBooks(this.searchField.value)}
+          onKeyDown={() => this.props.findBooks(this.searchField.value)}
         />
         <img className='cancel' src={cancel} onClick={() => this.props.cancelSearch(this.searchField)} alt="cancel"/>
       </Form.Group>

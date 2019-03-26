@@ -11,21 +11,17 @@ import Events from './components/Events/Events';
 import MediaQuery from 'react-responsive';
 import DesktopMsg from './components/DesktopMsg/DeskstopMsg';
 
-// import openSocket from 'socket.io-client';
-// const socket = openSocket('http://localhost:8080');
-
 const loginUrl = `http://localhost:8080/login`;
 const signUpUrl = `http://localhost:8080/signup`;
 const booksPostUrl = `http://localhost:8080/books`;
 const locationUrl = `http://localhost:8080/location`;
 const userUrl = `http://localhost:8080/user`;
+const getUrl = (route, input) =>
+  `http://localhost:8080/${route}?input=${input}`;
 let storageToken = localStorage.getItem('token');
 let storageId = localStorage.getItem('userId');
 let lastLatLng = localStorage.getItem('userLatLng');
 let default_viewport = [36.2048, 138.2019];
-
-const getUrl = (route, input) =>
-  `http://localhost:8080/${route}?input=${input}`;
 
 class App extends Component {
   state = {
@@ -70,9 +66,6 @@ class App extends Component {
               longitude,
               UserId: storageId
             });
-            // .then(({ data }) => {
-            //   console.log(data);
-            // });
           }
         );
       },
