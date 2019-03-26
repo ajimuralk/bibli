@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Location, Book, UserBook, User } = require('../models');
 const sequelize = require('sequelize');
+const db = require('../models/index');
 
 router
   .route('/')
@@ -19,102 +20,23 @@ router
       if (!users) {
         res.json({ errMsg: 'No nearby users' });
       } else {
-        res.json(users);
-        // User.findAll({
-        //   where: { UserId: users[0].id },
-        //   include: [
-        //     {
-        //       model: Book,
-        //       through: {
-        //         attributes: [
-        //           ['Book.title'],
-        //           ['Book.author'],
-        //           ['User.firstName'],
-        //           ['User.lastName'],
-        //           ['User.id']
-        //         ]
-        //       }
-        //     }
-        //     ,{
-        //       model: Book,
-        //       attributes: [
-        //         ['Book.title'],
-        //         ['Book.author'],
-        //         ['User.firstName'],
-        //         ['User.lastName'],
-        //         ['User.id']
-        //       ]
-        //     }
-        //   ]
-        // }).then(data => {
-        //   res.json(data);
-        // });
+        // res.json(users);
 
-        // sequelize
-        //   .query(
-        //     'SELECT Book.title, Book.author, User.firstName, User.lastName, User.id FROM Book INNER JOIN UserBook ON Book.BookId = UserBook.BookId INNER JOIN Users ON UserBook.UserId = User.id',
-        //     { type: sequelize.QueryTypes.SELECT }
-        //   )
-        //   .then(([results, metadata]) => {
-        //     res.json(results)
-        //   });
-
-        // Book.findAll({
-        //   include: [
-        //     { model: UserBook, required: true, where: { UserId: user.id } }
-        //   ],
-        //   incldue: [
-        //     { model: User, required: true, where: { UserId: user.id } }
-        //   ],
-        //   attributes: [
-        //     ['Book.title'],
-        //     ['Book.author'],
-        //     ['User.firstName'],
-        //     ['User.lastName'],
-        //     ['User.id']
-        //   ]
-        // }).then(data => {
-        //   return data;
-        // });
-
-        // Book.findAll({
-        //   include: [{
-        //     model: User,
-        //     through: {
-        //       model: UserBook,
-        //       attributes: ['UserId'],
-        //       where: {UserId: users.UsersId}
-        //     }
-        //   }]
-        // }).then(data => {
-        //   res.json(data)
-        // })
-
-        // let u = {
-        //   user: [],
-        //   userBookIds: [],
-        //   books: []
-        // };
-
-        // u.user = users;
-
-        // users.map(user => {
-        //   UserBook.findAll({
-        //     where: { UserId: user.UserId }
-        //   }).then(data => {
-        //     u.userBookIds = data;
-
-        //     data.map(book => {
-        //       Book.findAll({
-        //         where: { BookId: book.BookId }
-        //       }).then(bookData => {
-        //         u.books = bookData;
-        //       });
-        //     });
-        //   });
-        //   usersArr.push(u);
-        // });
-        // res.json(usersArr);
+        db.sequelize
+          .query(
+            `SELECT 
+            Books.title, Books.author, Books.publisher, Books.publishedDate, Books.averageRating, Books.ratingsCount, Users.firstName, Users.lastName, Users.id, Locations.latitude,Locations.longitude 
+            FROM Books 
+            INNER JOIN UserBooks ON Books.BookId = UserBooks.BookId 
+            INNER JOIN Users ON UserBooks.UserId = Users.id 
+            INNER JOIN Locations ON Locations.UserId = Users.id`,
+            {
+              type: sequelize.QueryTypes.SELECT
+            }
+          )
+          .then(results => {
+            res.json(results);
+          });
       }
     });
   })

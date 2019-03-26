@@ -91,6 +91,7 @@ class App extends Component {
         coords: this.state.userLatLng
       })
       .then(({ data }) => {
+        console.log(data)
         if (data.coords === null) return;
         const { latitude, longitude } = data.coords;
         this.setState({

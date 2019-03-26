@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Sequelize = require('sequelize');
+const sequelize = require('sequelize');
+const db = require('../models/index');
 const { User, Book, UserBook, Location } = require('../models');
 const errMsg =
   "The email or password you entered couldn't be verified. Please try again.";
@@ -10,8 +11,7 @@ router
   .post((req, res) => {
     const { id } = req.body;
     User.findOne({
-      where: { id },
-      attributes: { exclude: ['password'] }
+      where: { id }
     }).then(user => {
       if (!user) {
         res.json({
@@ -19,19 +19,26 @@ router
           err: errMsg
         });
       } else {
-        let userId = user.id;
-        
-        
-        UserBook.findAll({
-          where: { userId }
-        })
-        .then(books => {
-          Location.findOne({
-            where: { userId }
-          }).then(coords => {
-            res.json({ user, books, coords });
+        db.sequelize
+          .query(
+            `SELECT 
+            Users.id, Users.firstName, Users.lastName, Books.BookId, Books.title, Books.author, Books.publisher, Books.publishedDate, Books.averageRating, Books.ratingsCount, Locations.latitude, Locations.longitude 
+            FROM Users 
+            INNER JOIN UserBooks ON UserBooks.UserId = Users.id 
+            INNER JOIN Books ON UserBooks.BookId = Books.BookId 
+            INNER JOIN Locations ON Locations.UserId = Users.id 
+            WHERE Users.id = ${user.id}`,
+            {
+              type: sequelize.QueryTypes.SELECT
+            }
+          )
+          .then(data => {
+            let userObj = {}
+            data.map(item => {
+             Object.assign(userObj, item)
+            })
+            res.json(userObj);
           });
-        });
       }
     });
   })
@@ -45,5 +52,3 @@ router
   });
 
 module.exports = router;
-
-
