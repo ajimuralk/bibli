@@ -58,9 +58,9 @@ class Nearby extends Component {
             {/* <Image src={refreshSvg} className='refresh'/> */}
               <TileLayer url={lightMap} attribution={mapTile} />
               {nearbyList}
-              {/* <Marker position={userLatLng}>
+              <Marker position={userLatLng} fillColor="red"> 
                 <Popup> You are here</Popup>
-              </Marker> */}
+              </Marker>
             </Map>
             <Navbar />
           </>

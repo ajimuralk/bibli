@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {});
   UserBook.associate = function(models) {
+    
   };
   return UserBook;
 };

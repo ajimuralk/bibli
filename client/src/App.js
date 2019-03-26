@@ -84,7 +84,7 @@ class App extends Component {
 
   findNearbyUsers = userId => {
     axios.get(getUrl('location', userId)).then(({ data }) => {
-      console.log(data)
+      console.log(data);
       this.setState({
         nearbyUsers: data
       });
@@ -155,15 +155,19 @@ class App extends Component {
           }, 3000);
           return;
         }
-        this.setState({
-          loggedInToken: data.token,
-          userId: data.user.id,
-          user: data.user,
-          errMsg: data.err
-        });
-        this.getUserLocation();
-        localStorage.setItem('token', this.state.loggedInToken);
-        localStorage.setItem('userId', this.state.user.id);
+        this.setState(
+          {
+            loggedInToken: data.token,
+            userId: data.user.id,
+            user: data.user,
+            errMsg: data.err
+          },
+          () => {
+            this.getUserLocation();
+            localStorage.setItem('token', this.state.loggedInToken);
+            localStorage.setItem('userId', this.state.user.id);
+          }
+        );
       });
   };
 

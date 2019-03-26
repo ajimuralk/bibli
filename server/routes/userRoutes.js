@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Sequelize = require('sequelize');
 const { User, Book, UserBook, Location } = require('../models');
 const errMsg =
   "The email or password you entered couldn't be verified. Please try again.";
@@ -19,9 +20,12 @@ router
         });
       } else {
         let userId = user.id;
+        
+        
         UserBook.findAll({
           where: { userId }
-        }).then(books => {
+        })
+        .then(books => {
           Location.findOne({
             where: { userId }
           }).then(coords => {
@@ -41,3 +45,5 @@ router
   });
 
 module.exports = router;
+
+
