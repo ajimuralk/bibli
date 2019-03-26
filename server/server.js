@@ -19,53 +19,6 @@ app.use('/login', loginRoutes);
 app.use('/user', userRoutes);
 app.use('/location', locationRoutes);
 
-// app.get('/service-worker.js', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
-// });
-
-// app.route({
-//   method: 'GET',
-//   path: '/{path*}',
-//   handler: {
-//     file: 'index.html',
-//   },
-// })
-
 app.listen(PORT, () => {
   console.log(`Listening on PORT: ${PORT}`);
 });
-
-
-
-// const http = require('http');
-// const server = http.createServer(app);
-// const io = require('socket.io')(server);
-
-// const getApiAndEmit = async socket => {
-//   try {
-//     const res = await axios.get(
-//       "https://api.darksky.net/forecast/875b76a1981f5533dd5aff2060f964c1/43.7695,11.2558"
-//     );
-//     socket.emit("FromAPI", res.data.currently.temperature); // Emitting a new message. It will be consumed by the client
-//   } catch (error) {
-//     console.error(`Error: ${error.code}`);
-//   }
-// };
-
-// let interval;
-
-// io.on('connection', socket => {
-//   console.log('New client connected');
-//   if (interval) {
-//     clearInterval(interval);
-//   }
-//   interval = setInterval(() => getApiAndEmit(socket), 5000);
-//   socket.on('disconnect', () => {
-//     console.log('Client disconnected');
-//   });
-// });
-
-
-// server.listen(PORT);
-// console.log(`Listening on port ${PORT}`);
-

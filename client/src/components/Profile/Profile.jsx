@@ -11,11 +11,11 @@ class Profile extends Component {
     return (
       <div>
         <h1 className="profile__h1">{user.firstName}</h1>
-        <h5>Currently reading: {userBooks.title} by {userBooks.author}</h5>
+        <div className="header-container">
+        <h4 className="current-book__header">Currently reading:</h4>
+        <span className="current-book"> <strong>{userBooks.title}</strong> by {userBooks.author}</span>
+        </div>
         <Image className="profileSvg" src={profileSvg} />
-        
-
-        <div>{/* Your books: {bookArray} */}</div>
 
         <Link
           to="/"

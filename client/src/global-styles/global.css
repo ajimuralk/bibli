@@ -233,6 +233,32 @@ body {
   width: 80%;
 }
 
+.header-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 10% 5% 0 5%;
+}
+
+.header-container .current-book__header {
+  font-size: 1.3rem;
+}
+
+.header-container .current-book {
+  font-size: 1.2rem;
+  color: #252728;
+}
+
 .signOut {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -6,6 +6,25 @@
   width: 80%;
 }
 
+.header-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  // background: white;
+  // border-radius: 10px;
+  margin: 10% 5% 0 5%;
+
+  .current-book__header {
+    font-size: 1.3rem;
+  }
+
+  .current-book {
+    font-size: 1.2rem;
+    color: $text-black;
+  }
+}
+
 .signOut {
   display: flex;
   justify-content: center;
@@ -17,4 +36,3 @@
   color: $text-black;
   border-radius: 5px;
 }
-
