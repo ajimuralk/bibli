@@ -19,26 +19,35 @@ router
           err: errMsg
         });
       } else {
-        db.sequelize
-          .query(
-            `SELECT 
+        UserBook.findAll({
+          where: { UserId: user.id }
+        }).then(data => {
+          if (data.length === 0) {
+            res.json(user)
+            }
+          else {
+            db.sequelize
+              .query(
+                `SELECT 
             Users.id, Users.firstName, Users.lastName, Books.BookId, Books.title, Books.author, Books.publisher, Books.publishedDate, Books.averageRating, Books.ratingsCount, Locations.latitude, Locations.longitude 
             FROM Users 
             INNER JOIN UserBooks ON UserBooks.UserId = Users.id 
             INNER JOIN Books ON UserBooks.BookId = Books.BookId 
             INNER JOIN Locations ON Locations.UserId = Users.id 
             WHERE Users.id = ${user.id}`,
-            {
-              type: sequelize.QueryTypes.SELECT
-            }
-          )
-          .then(data => {
-            let userObj = {}
-            data.map(item => {
-             Object.assign(userObj, item)
-            })
-            res.json(userObj);
-          });
+                {
+                  type: sequelize.QueryTypes.SELECT
+                }
+              )
+              .then(data => {
+                let userObj = {};
+                data.map(item => {
+                  Object.assign(userObj, item);
+                });
+                res.json(userObj);
+              });
+          }
+        });
       }
     });
   })
