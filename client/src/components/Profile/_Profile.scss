@@ -1,6 +1,27 @@
-.profile__h1 {
-  margin: 15% 0 0 5%;
+
+.top-container {
+  display: flex;
+  flex-flow: row nowrap;
+
+  .profile__h1 {
+    margin: 5% 0 0 5%;
+  }
+  .signOut {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-size: .9rem;
+    font-weight: bold;
+    padding: 1%;
+    margin: 10% 0 0 35%;
+    background: $nav-blue;
+    color: $text-black;
+    border-radius: 5px;
+  }
+  
 }
+
+
 .profileSvg {
   margin: 25% 0 0 10%;
   width: 80%;
@@ -28,14 +49,3 @@
   }
 }
 
-.signOut {
-  display: flex;
-  justify-content: center;
-  font-size: 1.3rem;
-  font-weight: bold;
-  padding: 1% 0;
-  margin: 20% 30% 0 30%;
-  background: $nav-blue;
-  color: $text-black;
-  border-radius: 5px;
-}

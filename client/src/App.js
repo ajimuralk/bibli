@@ -38,6 +38,7 @@ class App extends Component {
     loggedInToken: '' || storageToken,
     userId: '' || storageId,
     errMsg: '',
+    successMsg: '',
     user: {},
     userBooks: [],
     books: [],
@@ -86,7 +87,7 @@ class App extends Component {
 
   findNearbyUsers = userId => {
     axios.get(getUrl('location', userId)).then(({ data }) => {
-      console.log(data)
+      console.log(data);
       this.setState({
         nearbyUsers: data
       });
@@ -245,7 +246,16 @@ class App extends Component {
               errMsg: ''
             });
           }, 3000);
-        }
+        } else if (data.success === true)
+          this.setState({
+            successMsg: 'Sign up successful!'
+          });
+        setTimeout(() => {
+          window.location.assign('/');
+          this.setState({
+            successMsg: ''
+          });
+        }, 1000);
       });
   };
 
@@ -280,10 +290,15 @@ class App extends Component {
                     toggleSignUp={this.toggleSignUp}
                     signUpClicked={this.state.signUpClicked}
                     errMsg={this.state.errMsg}
+                    successMsg={this.state.successMsg}
                   />
                 )}
               />
             )}
+            {this.state.successMsg && (
+              <Route path="/" component={LoginContainer} />
+            )}
+
             <Route
               path="/"
               exact

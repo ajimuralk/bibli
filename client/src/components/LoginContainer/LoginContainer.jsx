@@ -12,6 +12,8 @@ class Login extends Component {
 
       {(this.props.errMsg) && (<div className="login-error">{this.props.errMsg}</div>)}
 
+      {(this.props.successMsg) && (<div className="success-message">{this.props.successMsg}</div>) }
+
         <Image className="login__logo" src={logo} />
         <h1 className="login__h1">b i b l i</h1>
 

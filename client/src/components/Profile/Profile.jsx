@@ -9,21 +9,26 @@ class Profile extends Component {
     const { user, userBooks } = this.props;
     return (
       <div>
-        <h1 className="profile__h1">{user.firstName}</h1>
+        <div className="top-container">
+          <h1 className="profile__h1">{user.firstName}</h1>
+          <Link
+            to="/"
+            className="signOut"
+            onClick={() => this.props.signOut(user.id)}
+          >
+            SIGN OUT
+          </Link>
+        </div>
         <div className="header-container">
-        <h4 className="current-book__header">Currently reading</h4>
-        <div className="border"/>
-        <span className="current-book"> <strong>{userBooks.title}</strong> by {userBooks.author}</span>
+          <h4 className="current-book__header">Currently reading</h4>
+          <div className="border" />
+          <span className="current-book">
+            {' '}
+            <strong>{userBooks.title}</strong> by {userBooks.author}
+          </span>
         </div>
         <Image className="profileSvg" src={profileSvg} />
 
-        <Link
-          to="/"
-          className="signOut"
-          onClick={() => this.props.signOut(user.id)}
-        >
-          SIGN OUT
-        </Link>
         <Navbar />
       </div>
     );
