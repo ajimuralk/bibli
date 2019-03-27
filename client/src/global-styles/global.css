@@ -213,6 +213,20 @@ body {
   width: 80%;
 }
 
+.searching {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 5% 0;
+  font-size: .9rem;
+}
+
 .Navbar {
   position: fixed;
   bottom: 0;
@@ -281,6 +295,10 @@ body {
   background: #e8eef2;
   color: #252728;
   border-radius: 5px;
+}
+
+.books-link {
+  display: none;
 }
 
 .profileSvg {

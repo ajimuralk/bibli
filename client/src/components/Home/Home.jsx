@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Image from 'react-bootstrap/Image';
 import SearchForm from '../SearchForm/SearchForm';
 import BookList from '../Booklist/BookList.jsx';
-import Navbar from '../Navbar/Navbar';
 import bookSvg from '../../assets/svg/undraw_book_lover_mkck.svg';
 
 class Home extends Component {
@@ -24,7 +23,6 @@ class Home extends Component {
           books={this.props.books}
           postBook={this.props.postBook}
         />
-        <Navbar />
       </div>
     );
   }

@@ -10,6 +10,7 @@ import './global-styles/global.css';
 import Events from './components/Events/Events';
 import MediaQuery from 'react-responsive';
 import DesktopMsg from './components/DesktopMsg/DeskstopMsg';
+import Navbar from './components/Navbar/Navbar';
 
 // const loginUrl = `http://localhost:8080/login`;
 // const signUpUrl = `http://localhost:8080/signup`;
@@ -101,14 +102,7 @@ class App extends Component {
       })
       .then(({ data }) => {
         if (data === null) return;
-        const {
-          firstName,
-          lastName,
-          id,
-          title,
-          author
-        } = data;
-        console.log(data)
+        const { firstName, lastName, id, title, author } = data;
         this.setState({
           user: {
             firstName,
@@ -152,14 +146,13 @@ class App extends Component {
         });
       }, 3000);
       return;
-    };
+    }
     axios
       .post(loginUrl, {
         email,
         password
       })
       .then(({ data }) => {
-        console.log(data.user.id)
         if (data.success === false) {
           this.setState({
             errMsg: 'Invalid username/password'
@@ -185,7 +178,6 @@ class App extends Component {
             localStorage.setItem('userId', this.state.userId);
           }
         );
-        console.log(this.state.userId)
       });
   };
 
@@ -202,11 +194,11 @@ class App extends Component {
         book
       })
       .then(res => {
+        this.getUserData();
         this.toggleBookModal();
         setTimeout(() => {
           this.toggleBookModal();
         }, 2000);
-        console.log(res.data);
       });
   };
 
@@ -294,10 +286,6 @@ class App extends Component {
                 )}
               />
             )}
-            {this.state.successMsg && (
-              <Route path="/" component={LoginContainer} />
-            )}
-
             <Route
               path="/"
               exact
@@ -336,6 +324,7 @@ class App extends Component {
             <Route path="/hello" render={() => <Hello />} />
             <Route path="/events" render={() => <Events />} />
           </Switch>
+          {this.state.loggedInToken && <Navbar />}
         </MediaQuery>
       </div>
     );

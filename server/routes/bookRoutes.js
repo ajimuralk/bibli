@@ -37,7 +37,7 @@ router
           categories,
           averageRating,
           ratingsCount,
-          image: imageLinks.thumbnail
+          image: `https${imageLinks.thumbnail.substr(4)}`
         };
       });
       res.json(data);

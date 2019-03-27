@@ -61,7 +61,6 @@ class Nearby extends Component {
                 <Popup> You are here</Popup>
               </Marker>
             </Map>
-            <Navbar />
           </>
         )}
       </div>
