@@ -40,7 +40,7 @@ class App extends Component {
     errMsg: '',
     successMsg: '',
     user: {},
-    userBooks: [],
+    userBooks: {},
     books: [],
     nearbyUsers: [],
     signUpClicked: false,
@@ -50,7 +50,7 @@ class App extends Component {
   componentDidMount() {
     if (this.state.loggedInToken) {
       this.getUserData();
-      this.findNearbyUsers(this.state.user.id);
+      this.findNearbyUsers(storageId);
       return <Home />;
     } else return;
   }
@@ -74,7 +74,7 @@ class App extends Component {
             axios.post(locationUrl, {
               latitude,
               longitude,
-              UserId: this.state.user.id
+              UserId: storageId
             });
           }
         );
@@ -87,7 +87,6 @@ class App extends Component {
 
   findNearbyUsers = userId => {
     axios.get(getUrl('location', userId)).then(({ data }) => {
-      console.log(data);
       this.setState({
         nearbyUsers: data
       });
@@ -97,7 +96,7 @@ class App extends Component {
   getUserData() {
     axios
       .post(userUrl, {
-        id: storageId,
+        id: this.state.userId,
         coords: this.state.userLatLng
       })
       .then(({ data }) => {
@@ -106,11 +105,10 @@ class App extends Component {
           firstName,
           lastName,
           id,
-          latitude,
-          longitude,
           title,
           author
         } = data;
+        console.log(data)
         this.setState({
           user: {
             firstName,
@@ -120,8 +118,7 @@ class App extends Component {
           userBooks: {
             title,
             author
-          },
-          userLatLng: [latitude, longitude]
+          }
         });
       });
   }
@@ -155,14 +152,14 @@ class App extends Component {
         });
       }, 3000);
       return;
-    }
+    };
     axios
       .post(loginUrl, {
         email,
         password
       })
       .then(({ data }) => {
-        console.log(data);
+        console.log(data.user.id)
         if (data.success === false) {
           this.setState({
             errMsg: 'Invalid username/password'
@@ -182,11 +179,13 @@ class App extends Component {
             errMsg: data.err
           },
           () => {
+            this.getUserData();
             this.getUserLocation();
             localStorage.setItem('token', this.state.loggedInToken);
-            localStorage.setItem('userId', this.state.user.id);
+            localStorage.setItem('userId', this.state.userId);
           }
         );
+        console.log(this.state.userId)
       });
   };
 

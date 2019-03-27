@@ -19,14 +19,22 @@ class Profile extends Component {
             SIGN OUT
           </Link>
         </div>
-        <div className="header-container">
-          <h4 className="current-book__header">Currently reading</h4>
-          <div className="border" />
-          <span className="current-book">
-            {' '}
-            <strong>{userBooks.title}</strong> by {userBooks.author}
-          </span>
-        </div>
+
+        {this.props.userBooks.length === 0 ? (
+          <>
+            <Link to={'/'} className="noBooks-link">Click here to seach for books!</Link>
+          </>
+        ) : (
+          <div className="header-container">
+            <h4 className="current-book__header">Currently reading</h4>
+            <div className="border" />
+            <span className="current-book">
+              {' '}
+              <strong>{userBooks.title}</strong> by {userBooks.author}
+            </span>
+          </div>
+        )}
+
         <Image className="profileSvg" src={profileSvg} />
 
         <Navbar />

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from '../Navbar/Navbar';
 import mapSvg from '../../assets/svg/undraw_directions_x53j (1).svg';
-import refreshSvg from '../../assets/icons/refresh-cw.svg';
 import Image from 'react-bootstrap/Image';
-import { Map, Marker, Popup, TileLayer, Circle, ImageOverlay } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer, Circle } from 'react-leaflet';
 import distanceCalc from '../../distanceCalc';
 
 const lightMap =
@@ -50,14 +49,13 @@ class Nearby extends Component {
         {!userLatLng ? (
           <>
             <Image className="mapSvg" src={mapSvg} />
+            <h4 className="searching">Searching...</h4>
             <Navbar />
           </>
         ) : (
           <>
             <Map center={userLatLng} zoom="18" id="Map" animate="true">
-              {/* <Image src={refreshSvg} /> */}
               <TileLayer url={lightMap} attribution={mapTile} />
-              {/* <ImageOverlay src={refreshSvg} /> */}
               {nearbyList}
               <Marker position={userLatLng} fillColor="red">
                 <Popup> You are here</Popup>
