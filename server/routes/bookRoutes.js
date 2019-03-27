@@ -9,39 +9,45 @@ router
   .route('/')
   .get((req, res) => {
     const input = req.query.input;
-    axios.get(bookSearch(input)).then(response => {
-      const data = response.data.items.map(book => {
-        let {
-          title,
-          authors,
-          publisher,
-          publishedDate,
-          description,
-          imageLinks,
-          categories,
-          averageRating,
-          ratingsCount
-        } = book.volumeInfo;
+    axios
+      .get(bookSearch(input))
+      .then(response => {
+        const data = response.data.items
+          // .filter(book => {
+          //   return book.volumeInfo.imageLinks.thumbnail !== undefined;
+          // })
+          .map(book => {
+            let {
+              title,
+              authors,
+              publisher,
+              publishedDate,
+              description,
+              imageLinks,
+              categories,
+              averageRating,
+              ratingsCount
+            } = book.volumeInfo;
 
-        if (!imageLinks) {
-          imageLinks = '';
-        }
+            if (!imageLinks) {
+              imageLinks = '';
+            }
 
-        return {
-          id: book.id,
-          title,
-          author: authors,
-          publisher,
-          publishedDate,
-          description,
-          categories,
-          averageRating,
-          ratingsCount,
-          image: `https${imageLinks.thumbnail.substr(4)}`
-        };
-      });
-      res.json(data);
-    });
+            return {
+              id: book.id,
+              title,
+              author: authors,
+              publisher,
+              publishedDate,
+              description,
+              categories,
+              averageRating,
+              ratingsCount,
+              image: `https${imageLinks.thumbnail.substr(4)}`
+            };
+          });
+        res.json(data);
+      })
   })
   .post((req, res) => {
     let {
@@ -58,7 +64,6 @@ router
     User.findOne({
       where: { id }
     }).then(user => {
-
       Book.create({
         BookId: BookId,
         title,
