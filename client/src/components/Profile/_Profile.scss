@@ -2,23 +2,26 @@
   margin: 15% 0 0 5%;
 }
 .profileSvg {
-  margin: 50% 0 0 10%;
+  margin: 25% 0 0 10%;
   width: 80%;
 }
 
 .header-container {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column wrap;
   justify-content: center;
-  align-items: center;
-  // background: white;
-  // border-radius: 10px;
+  align-items: flex-start;
   margin: 10% 5% 0 5%;
 
   .current-book__header {
     font-size: 1.3rem;
   }
 
+  .border {
+    height: 1px;
+    width: 90vw;
+    margin: 2% 0;
+  }
   .current-book {
     font-size: 1.2rem;
     color: $text-black;

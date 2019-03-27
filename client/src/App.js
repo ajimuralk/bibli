@@ -77,7 +77,6 @@ class App extends Component {
 
   findNearbyUsers = userId => {
     axios.get(getUrl('location', userId)).then(({ data }) => {
-      console.log(data);
       this.setState({
         nearbyUsers: data
       });
@@ -91,7 +90,6 @@ class App extends Component {
         coords: this.state.userLatLng
       })
       .then(({ data }) => {
-        console.log(data)
         if (data === null) return;
         const { firstName, lastName, id, latitude, longitude, title, author } = data;
         this.setState({

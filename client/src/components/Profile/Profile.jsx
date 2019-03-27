@@ -7,12 +7,12 @@ import { Link } from 'react-router-dom';
 class Profile extends Component {
   render() {
     const { user, userBooks } = this.props;
-    console.log(userBooks)
     return (
       <div>
         <h1 className="profile__h1">{user.firstName}</h1>
         <div className="header-container">
-        <h4 className="current-book__header">Currently reading:</h4>
+        <h4 className="current-book__header">Currently reading</h4>
+        <div className="border"/>
         <span className="current-book"> <strong>{userBooks.title}</strong> by {userBooks.author}</span>
         </div>
         <Image className="profileSvg" src={profileSvg} />
