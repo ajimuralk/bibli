@@ -11,13 +11,22 @@ import Events from './components/Events/Events';
 import MediaQuery from 'react-responsive';
 import DesktopMsg from './components/DesktopMsg/DeskstopMsg';
 
-const loginUrl = `http://localhost:8080/login`;
-const signUpUrl = `http://localhost:8080/signup`;
-const booksPostUrl = `http://localhost:8080/books`;
-const locationUrl = `http://localhost:8080/location`;
-const userUrl = `http://localhost:8080/user`;
+// const loginUrl = `http://localhost:8080/login`;
+// const signUpUrl = `http://localhost:8080/signup`;
+// const booksPostUrl = `http://localhost:8080/books`;
+// const locationUrl = `http://localhost:8080/location`;
+// const userUrl = `http://localhost:8080/user`;
+// const getUrl = (route, input) =>
+//   `http://localhost:8080/${route}?input=${input}`;
+
+const loginUrl = `https://bibli-server.ngrok.io/login`;
+const signUpUrl = `https://bibli-server.ngrok.io/signup`;
+const booksPostUrl = `https://bibli-server.ngrok.io/books`;
+const locationUrl = `https://bibli-server.ngrok.io/location`;
+const userUrl = `https://bibli-server.ngrok.io/user`;
 const getUrl = (route, input) =>
-  `http://localhost:8080/${route}?input=${input}`;
+  `https://bibli-server.ngrok.io/${route}?input=${input}`;
+
 let storageToken = localStorage.getItem('token');
 let storageId = localStorage.getItem('userId');
 let lastLatLng = localStorage.getItem('userLatLng');
@@ -77,6 +86,7 @@ class App extends Component {
 
   findNearbyUsers = userId => {
     axios.get(getUrl('location', userId)).then(({ data }) => {
+      console.log(data)
       this.setState({
         nearbyUsers: data
       });
@@ -91,7 +101,15 @@ class App extends Component {
       })
       .then(({ data }) => {
         if (data === null) return;
-        const { firstName, lastName, id, latitude, longitude, title, author } = data;
+        const {
+          firstName,
+          lastName,
+          id,
+          latitude,
+          longitude,
+          title,
+          author
+        } = data;
         this.setState({
           user: {
             firstName,
@@ -99,8 +117,8 @@ class App extends Component {
             id
           },
           userBooks: {
-            title, 
-            author 
+            title,
+            author
           },
           userLatLng: [latitude, longitude]
         });
@@ -143,7 +161,7 @@ class App extends Component {
         password
       })
       .then(({ data }) => {
-        console.log(data)
+        console.log(data);
         if (data.success === false) {
           this.setState({
             errMsg: 'Invalid username/password'

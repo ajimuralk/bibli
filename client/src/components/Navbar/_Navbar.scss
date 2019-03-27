@@ -9,6 +9,7 @@
   height: 8vh;
   border-top: 1px solid gray;
   background: $nav-blue;
+  z-index: 1000;
 
   .activeRoute {
     border-bottom: 4px rgb(146, 200, 231) solid;
