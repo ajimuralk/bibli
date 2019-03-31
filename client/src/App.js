@@ -12,21 +12,13 @@ import MediaQuery from 'react-responsive';
 import DesktopMsg from './components/DesktopMsg/DeskstopMsg';
 import Navbar from './components/Navbar/Navbar';
 
-// const loginUrl = `http://localhost:8080/login`;
-// const signUpUrl = `http://localhost:8080/signup`;
-// const booksPostUrl = `http://localhost:8080/books`;
-// const locationUrl = `http://localhost:8080/location`;
-// const userUrl = `http://localhost:8080/user`;
-// const getUrl = (route, input) =>
-//   `http://localhost:8080/${route}?input=${input}`;
-
-const loginUrl = `https://bibli-server.ngrok.io/login`;
-const signUpUrl = `https://bibli-server.ngrok.io/signup`;
-const booksPostUrl = `https://bibli-server.ngrok.io/books`;
-const locationUrl = `https://bibli-server.ngrok.io/location`;
-const userUrl = `https://bibli-server.ngrok.io/user`;
+const loginUrl = `http://localhost:8080/login`;
+const signUpUrl = `http://localhost:8080/signup`;
+const booksPostUrl = `http://localhost:8080/books`;
+const locationUrl = `http://localhost:8080/location`;
+const userUrl = `http://localhost:8080/user`;
 const getUrl = (route, input) =>
-  `https://bibli-server.ngrok.io/${route}?input=${input}`;
+  `http://localhost:8080/${route}?input=${input}`;
 
 let storageToken = localStorage.getItem('token');
 let storageId = localStorage.getItem('userId');
@@ -49,16 +41,16 @@ class App extends Component {
   };
 
   componentDidMount() {
-    if (this.state.loggedInToken) {
+    if (storageToken) {
       this.getUserData();
+      this.getUserLocation();
       this.findNearbyUsers(storageId);
-      return <Home />;
     } else return;
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.userLatLng !== this.getUserLocation()) {
-      return true;
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.userLatLng !== lastLatLng) {
+      this.getUserLocation();
     }
   }
 
@@ -97,11 +89,10 @@ class App extends Component {
   getUserData() {
     axios
       .post(userUrl, {
-        id: this.state.userId,
-        coords: this.state.userLatLng
+        id: this.state.userId
       })
       .then(({ data }) => {
-        if (data === null) return;
+        console.log(data)
         const { firstName, lastName, id, title, author } = data;
         this.setState({
           user: {
@@ -118,6 +109,7 @@ class App extends Component {
   }
 
   findBooks = input => {
+
     axios
       .get(getUrl('books', input))
       .then(({ data }) => {
@@ -168,7 +160,6 @@ class App extends Component {
           {
             loggedInToken: data.token,
             userId: data.user.id,
-            user: data.user,
             errMsg: data.err
           },
           () => {
