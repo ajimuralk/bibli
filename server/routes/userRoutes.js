@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const sequelize = require('sequelize');
 const db = require('../models/index');
-const { User, Book, UserBook, Location } = require('../models');
+const { User, UserBook, Location } = require('../models');
 const errMsg =
   "The email or password you entered couldn't be verified. Please try again.";
 
