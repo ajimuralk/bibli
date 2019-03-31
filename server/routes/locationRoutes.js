@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { Location, Book, UserBook, User } = require('../models');
+const isLoggedIn = require('../middleware/isLoggedIn');
 const sequelize = require('sequelize');
 const db = require('../models/index');
 
 router
   .route('/')
-  .get((req, res) => {
+  .get((isLoggedIn, req, res) => {
     const user = req.query.input;
     let usersArr = [];
 

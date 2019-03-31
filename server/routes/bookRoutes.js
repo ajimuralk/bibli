@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const { User, UserBook, Book } = require('../models');
-const isLoggedIn = require('../middleware/isLoggedIn');
 const bookSearch = require('../bookSearch');
 
 router
