@@ -2,28 +2,28 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import Home from './components/Home/Home';
-import LoginContainer from './components/LoginContainer/LoginContainer';
 import Nearby from './components/Nearby/Nearby';
 import Hello from './components/Hello/Hello';
 import Profile from './components/Profile/Profile';
-import './global-styles/global.css';
 import Events from './components/Events/Events';
 import MediaQuery from 'react-responsive';
-import DesktopMsg from './components/DesktopMsg/DeskstopMsg';
 import Navbar from './components/Navbar/Navbar';
+import LoginContainer from './components/LoginContainer/LoginContainer';
+import DesktopMsg from './components/DesktopMsg/DeskstopMsg';
+import './global-styles/global.css';
 
 const loginUrl = `http://localhost:8080/login`;
 const signUpUrl = `http://localhost:8080/signup`;
 const booksPostUrl = `http://localhost:8080/books`;
 const locationUrl = `http://localhost:8080/location`;
 const userUrl = `http://localhost:8080/user`;
+const default_viewport = [36.2048, 138.2019];
 const getUrl = (route, input) =>
   `http://localhost:8080/${route}?input=${input}`;
 
 let storageToken = localStorage.getItem('token');
 let storageId = localStorage.getItem('userId');
 let lastLatLng = localStorage.getItem('userLatLng');
-let default_viewport = [36.2048, 138.2019];
 
 class App extends Component {
   state = {
@@ -92,7 +92,6 @@ class App extends Component {
         id: this.state.userId
       })
       .then(({ data }) => {
-        console.log(data)
         const { firstName, lastName, id, title, author } = data;
         this.setState({
           user: {
@@ -109,7 +108,6 @@ class App extends Component {
   }
 
   findBooks = input => {
-
     axios
       .get(getUrl('books', input))
       .then(({ data }) => {
@@ -127,17 +125,21 @@ class App extends Component {
     });
   };
 
+  timeoutErr = () => {
+    setTimeout(() => {
+      this.setState({
+        errMsg: ''
+      });
+    }, 3000);
+  };
+
   login = (email, password) => {
     if (!email || !password) {
       this.setState({
         errMsg: 'Invalid username/password'
       });
-      setTimeout(() => {
-        this.setState({
-          errMsg: ''
-        });
-      }, 3000);
-      return;
+      this.timeoutErr();
+      return
     }
     axios
       .post(loginUrl, {
@@ -149,12 +151,8 @@ class App extends Component {
           this.setState({
             errMsg: 'Invalid username/password'
           });
-          setTimeout(() => {
-            this.setState({
-              errMsg: ''
-            });
-          }, 3000);
-          return;
+          this.timeoutErr();
+          return
         }
         this.setState(
           {
@@ -200,15 +198,11 @@ class App extends Component {
   };
 
   signUp = (firstName, lastName, email, password) => {
-    if (!(firstName || lastName) && !(email || password)) {
+    if (!(firstName || lastName) || !(email || password)) {
       this.setState({
         errMsg: 'Please complete all fields'
       });
-      setTimeout(() => {
-        this.setState({
-          errMsg: ''
-        });
-      }, 3000);
+      this.timeoutErr();
       return;
     }
     axios
@@ -223,11 +217,8 @@ class App extends Component {
           this.setState({
             errMsg: 'Email address already exists'
           });
-          setTimeout(() => {
-            this.setState({
-              errMsg: ''
-            });
-          }, 3000);
+          this.timeoutErr();
+          return;
         } else if (data.success === true)
           this.setState({
             successMsg: 'Sign up successful!'

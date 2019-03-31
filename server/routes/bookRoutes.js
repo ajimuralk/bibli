@@ -13,9 +13,9 @@ router
       .get(bookSearch(input))
       .then(response => {
         const data = response.data.items
-          // .filter(book => {
-          //   return book.volumeInfo.imageLinks.thumbnail !== undefined;
-          // })
+          .filter(book => {
+            return book.volumeInfo.imageLinks.thumbnail !== undefined || '';
+          })
           .map(book => {
             let {
               title,

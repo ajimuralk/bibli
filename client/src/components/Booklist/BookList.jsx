@@ -1,23 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Book from '../Book/Book.jsx';
 
-class BookList extends Component {
-  render() {
-    const books = this.props.books.map((book, i) => {
-      return (
-        <Book
-          {...book}
-          key={i}
-          postBook={this.props.postBook}
-        />
-      );
-    });
-    return (
-      <div>
-        {books}
-      </div>
-    );
-  }
-}
+const BookList = props => {
+  const { books } = props;
+  const list = books.map((book, i) => {
+    return <Book {...book} key={i} postBook={props.postBook} />;
+  });
+  return <div>{list}</div>;
+};
 
 export default BookList;
