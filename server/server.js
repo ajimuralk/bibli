@@ -8,7 +8,6 @@ const loginRoutes = require('./routes/loginRoutes');
 const userRoutes = require('./routes/userRoutes');
 const locationRoutes = require('./routes/locationRoutes');
 require('dotenv').config();
-// const PORT = process.env.PORT || 8082;
 const PORT = process.env.PORT;
 
 app.use(cors());
@@ -19,6 +18,6 @@ app.use('/login', loginRoutes);
 app.use('/user', userRoutes);
 app.use('/location', locationRoutes);
 
-app.listen(8080, () => {
+app.listen(PORT, () => {
   console.log(`Listening on PORT: ${PORT}`);
-});  
+});

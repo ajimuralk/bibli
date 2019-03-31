@@ -20,8 +20,6 @@ router
       if (!users) {
         res.json({ errMsg: 'No nearby users' });
       } else {
-        // res.json(users);
-
         db.sequelize
           .query(
             `SELECT 
