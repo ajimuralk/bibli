@@ -8,7 +8,6 @@ router
   .route('/')
   .get((req, res) => {
     const user = req.query.input;
-    let usersArr = [];
 
     Location.findAll({
       where: {
