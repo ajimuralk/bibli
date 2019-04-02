@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { Location, Book, UserBook, User } = require('../models');
-const isLoggedIn = require('../middleware/isLoggedIn');
 const sequelize = require('sequelize');
 const db = require('../models/index');
 
 router
   .route('/')
-  .get((isLoggedIn, req, res) => {
+  .get((req, res) => {
     const user = req.query.input;
-    let usersArr = [];
 
     Location.findAll({
       where: {
@@ -34,10 +32,10 @@ router
             }
           )
           .then(results => {
-            let userObj = {}
+            let userObj = {};
             results.map(user => {
-              Object.assign(userObj, user)
-            })
+              Object.assign(userObj, user);
+            });
             res.json([userObj]);
           });
       }

@@ -3,8 +3,6 @@ import Form from 'react-bootstrap/Form';
 import cancel from '../../assets/icons/x-circle.svg'
 
 class SearchForm extends Component {
-
-
   render() {
     return (
       <Form.Group className="search-container">

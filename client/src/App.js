@@ -205,6 +205,7 @@ class App extends Component {
       this.timeoutErr();
       return;
     }
+    console.log(firstName)
     axios
       .post(signUpUrl, {
         firstName,
