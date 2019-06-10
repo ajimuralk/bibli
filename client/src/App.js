@@ -54,6 +54,10 @@ class App extends Component {
     }
   }
 
+  setInterval = (() => {
+    this.findNearbyUsers(storageId)
+  }, 5000);
+
   getUserLocation = () => {
     navigator.geolocation.getCurrentPosition(
       success => {
@@ -81,7 +85,7 @@ class App extends Component {
   findNearbyUsers = userId => {
     axios.get(getUrl('location', userId)).then(({ data }) => {
       this.setState({
-        nearbyUsers: data
+        nearbyUsers: [data]
       });
     });
   };
@@ -205,7 +209,6 @@ class App extends Component {
       this.timeoutErr();
       return;
     }
-    console.log(firstName)
     axios
       .post(signUpUrl, {
         firstName,
@@ -246,6 +249,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.nearbyUsers)
     return (
       <div className="App">
         <MediaQuery query="(min-width: 481px)">

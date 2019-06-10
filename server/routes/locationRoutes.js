@@ -8,42 +8,30 @@ router
   .route('/')
   .get((req, res) => {
     const user = req.query.input;
-
-    Location.findAll({
-      where: {
-        UserId: {
-          [sequelize.Op.not]: user
+    db.sequelize
+      .query(
+        `SELECT 
+      Books.title, Books.author, Books.publisher, Books.publishedDate, Books.averageRating, Books.ratingsCount, Users.firstName, Users.lastName, Users.id, Locations.latitude,Locations.longitude 
+      FROM Books 
+      INNER JOIN UserBooks ON Books.BookId = UserBooks.BookId 
+      INNER JOIN Users ON UserBooks.UserId = Users.id 
+      INNER JOIN Locations ON Locations.UserId = Users.id`,
+        {
+          type: sequelize.QueryTypes.SELECT
         }
-      }
-    }).then(users => {
-      if (!users) {
-        res.json({ errMsg: 'No nearby users' });
-      } else {
-        db.sequelize
-          .query(
-            `SELECT 
-            Books.title, Books.author, Books.publisher, Books.publishedDate, Books.averageRating, Books.ratingsCount, Users.firstName, Users.lastName, Users.id, Locations.latitude,Locations.longitude 
-            FROM Books 
-            INNER JOIN UserBooks ON Books.BookId = UserBooks.BookId 
-            INNER JOIN Users ON UserBooks.UserId = Users.id 
-            INNER JOIN Locations ON Locations.UserId = Users.id`,
-            {
-              type: sequelize.QueryTypes.SELECT
-            }
-          )
-          .then(results => {
-            let userObj = {};
-            results.map(user => {
-              Object.assign(userObj, user);
-            });
-            res.json([userObj]);
-          });
-      }
-    });
+      )
+      .then(results => {
+        //Creates an array of all users, then filters our the currently signed in user, whose id is provided in the above request query input
+        let nearbyUsers = results.filter(singleUser => {
+          return singleUser['id'] !== Number(user);
+        });
+
+        res.json(nearbyUsers);
+      });
   })
   .post((req, res) => {
     const { latitude, longitude, UserId } = req.body;
-
+    /* findOrCreate requires .spread rather than .then to /access the method's contents */
     Location.findOrCreate({ where: { UserId } }).spread(
       (result, shouldCreateInstance) => {
         if (shouldCreateInstance) {
@@ -53,15 +41,18 @@ router
             UserId
           });
           res.json(result);
-        }
-        if (Object.is(result._previousDataValues, result.dataValues)) return;
-        Location.update({ latitude, longitude }, { where: { UserId } })
-          .then(locationResult => {
-            res.json({
-              update: `true`
-            });
-          })
-          .catch(err => console.log(err));
+          return;
+        } else if (Object.is(result._previousDataValues, result.dataValues)) {
+          return;
+        } else
+          Location.update({ latitude, longitude }, { where: { UserId } })
+            .then(locationResult => {
+              console.log(`Coords updated`);
+              res.json({
+                update: `true`
+              });
+            })
+            .catch(err => console.log(err));
       }
     );
   });
