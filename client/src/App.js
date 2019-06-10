@@ -48,11 +48,11 @@ class App extends Component {
     } else return;
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.userLatLng !== lastLatLng) {
-      this.getUserLocation();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.userLatLng !== lastLatLng) {
+  //     this.getUserLocation();
+  //   }
+  // }
 
   setInterval = (() => {
     this.findNearbyUsers(storageId)
@@ -85,7 +85,7 @@ class App extends Component {
   findNearbyUsers = userId => {
     axios.get(getUrl('location', userId)).then(({ data }) => {
       this.setState({
-        nearbyUsers: [data]
+        nearbyUsers: data
       });
     });
   };
@@ -249,7 +249,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.nearbyUsers)
     return (
       <div className="App">
         <MediaQuery query="(min-width: 481px)">

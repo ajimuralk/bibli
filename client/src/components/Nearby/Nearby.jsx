@@ -30,18 +30,17 @@ const Nearby = props => {
           id={user.UserId}
           key={i}
         >
-          <Circle
+          {/* <Circle
             center={{ lat: user.latitude, lng: user.longitude }}
             fillColor="white"
             radius={15}
-          />
+          /> */}
           <Popup>
             {user.title} by {user.author}
           </Popup>
         </Marker>
       );
     });
-
   return (
     <div>
       {!userLatLng ? (
@@ -54,10 +53,16 @@ const Nearby = props => {
         <>
           <Map center={userLatLng} zoom="18" id="Map" animate="true">
             <TileLayer url={lightMap} attribution={mapTile} />
+            <Circle
+            center={{ lat: userLatLng[0], lng: userLatLng[1] }}
+            fillColor="white"
+            radius={50}
+          />
             {nearbyList}
-            <Marker position={userLatLng} fillColor="red">
+          
+            {/* <Marker position={userLatLng} fillColor="red">
               <Popup> You are here</Popup>
-            </Marker>
+            </Marker> */}
           </Map>
         </>
       )}
