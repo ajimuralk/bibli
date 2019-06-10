@@ -30,11 +30,6 @@ const Nearby = props => {
           id={user.UserId}
           key={i}
         >
-          {/* <Circle
-            center={{ lat: user.latitude, lng: user.longitude }}
-            fillColor="white"
-            radius={15}
-          /> */}
           <Popup>
             {user.title} by {user.author}
           </Popup>
@@ -59,10 +54,6 @@ const Nearby = props => {
             radius={50}
           />
             {nearbyList}
-          
-            {/* <Marker position={userLatLng} fillColor="red">
-              <Popup> You are here</Popup>
-            </Marker> */}
           </Map>
         </>
       )}

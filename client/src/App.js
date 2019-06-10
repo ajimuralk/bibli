@@ -48,11 +48,11 @@ class App extends Component {
     } else return;
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.userLatLng !== lastLatLng) {
-  //     this.getUserLocation();
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.userLatLng !== lastLatLng) {
+      this.getUserLocation();
+    }
+  }
 
   setInterval = (() => {
     this.findNearbyUsers(storageId)
